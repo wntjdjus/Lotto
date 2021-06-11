@@ -1,0 +1,30 @@
+{{>layout/header}}
+
+<!-- Main -->
+<div id="main">
+    <div class="inner">
+        <header>
+            <h1>HelloWorld!!<br/>
+                template designed by <a href="http://html5up.net">HTML5 UP</a>.</h1>
+        </header>
+        <section class="tiles">
+            {{#items}}
+                <article class="style1">
+                        <span class="image">
+                            <img src="/images/pic01.jpg" alt=""/>
+                        </span>
+                    <a href="generic.html">
+                        <h2>{{category}}</h2>
+                        <h2>{{itemNm}}</h2>
+                        <div class="content">
+                            <p>{{user.userId}}</p>
+                            <p>{{description}}</p>
+                        </div>
+                    </a>
+                </article>
+            {{/items}}
+        </section>
+    </div>
+</div>
+
+{{>layout/footer}}
