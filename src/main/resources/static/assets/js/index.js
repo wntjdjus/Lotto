@@ -2,6 +2,11 @@ var main = {
     // init에 메서드 등록해줘야 사용 가능
     init : function (){
         var _this = this;
+
+        $('#btn-select').on('click', function (){
+            _this.select();
+        });
+
         $('#btn-save').on('click', function (){
             _this.save();
         });
@@ -14,7 +19,24 @@ var main = {
             _this.delete();
         });
     },
-save : function (){
+    select : function (){
+
+        $.ajax({
+            type: 'GET',
+            url: '/lotto',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8'
+        }).done(function (json){
+
+            var ball = JSON.parse(JSON.stringify(json));
+            document.getElementById("lotto").innerHTML=ball;
+
+        }).fail(function (error){
+            alert(JSON.stringify(error));
+        });
+
+    },
+    save : function (){
         var data = {
             title: $('#title').val(),
             author: $('#author').val(),
