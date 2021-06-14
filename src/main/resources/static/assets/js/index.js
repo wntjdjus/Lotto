@@ -18,6 +18,10 @@ var main = {
         $('#btn-delete').on('click', function (){
             _this.delete();
         });
+
+        $('#btn-reset').on('click', function (){
+            _this.reset();
+        });
     },
     select : function (){
 
@@ -28,8 +32,16 @@ var main = {
             contentType: 'application/json; charset=utf-8'
         }).done(function (json){
 
-            var ball = JSON.parse(JSON.stringify(json));
-            document.getElementById("lotto").innerHTML=ball;
+            //var ball = JSON.parse(JSON.stringify(json));
+
+            const element = document.getElementById("lotto");
+            var tmp = "hi~";
+
+            for(var i = 0; i < 6; i++){
+
+                element.innerHTML+=('<button type="button">'+tmp+'</button>');
+            }
+            element.innerHTML+='<br/>';
 
         }).fail(function (error){
             alert(JSON.stringify(error));
@@ -91,6 +103,11 @@ var main = {
         }).fail(function(error){
             alert(JSON.stringify(error));
         });
+    },
+    reset : function (){
+
+        const element = document.getElementById("lotto");
+        element.innerHTML = '';
     }
 };
 
