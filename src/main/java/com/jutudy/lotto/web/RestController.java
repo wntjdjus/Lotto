@@ -1,36 +1,28 @@
 package com.jutudy.lotto.web;
 
+import com.jutudy.lotto.service.Lotto.LottoService;
+import com.jutudy.lotto.web.dto.RandomLottoResponseDto;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
-import java.util.*;
 
-
+@RequiredArgsConstructor
 @org.springframework.web.bind.annotation.RestController
 public class RestController {
 
+    private Logger logger = LoggerFactory.getLogger(RestController.class);
+    private final LottoService lottoService;
+
     @GetMapping("/random-lotto")
-    public int[] hello() {
+    public RandomLottoResponseDto hello() {
 
-        int[] lotto = new int[7];
-        boolean[] chk = new boolean[46];
-        
-        Random random = new Random();
-        
-        for(int i = 0 ; i<7;i++){
-            
-            while(true){
-                
-                int x = random.nextInt(45)+1;
-                if(chk[x]){
-                    continue;
-                }else{
-                    chk[x]=true;
-                    lotto[i]=x;
-                    break;
-                }
-            }
-        }
-        Arrays.sort(lotto,0,6);
+        logger.info("########## /random-lotto 진입");
 
-        return lotto;
+        RandomLottoResponseDto odto = lottoService.getRandomLotto();
+
+        logger.info("########## /random-lotto 종료");
+
+        return odto;
     }
 }

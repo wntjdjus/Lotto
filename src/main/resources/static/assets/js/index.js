@@ -35,13 +35,13 @@ var main = {
             var lotto = JSON.parse(JSON.stringify(json));
 
             const element = document.getElementById("lotto");
-            var tmp = "hi~";
 
-            for(var i = 0; i < 6; i++){
-
-                element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto[i]+'</button>');
-            }
-            element.innerHTML+=('<button type="button" class="primary">'+lotto[6]+'</button>');
+            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.lottoNum1+'</button>');
+            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.lottoNum2+'</button>');
+            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.lottoNum3+'</button>');
+            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.lottoNum4+'</button>');
+            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.lottoNum5+'</button>');
+            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.lottoNum6+'</button>');
             element.innerHTML+='<br/>';
 
         }).fail(function (error){
