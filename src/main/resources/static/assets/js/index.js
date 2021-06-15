@@ -27,20 +27,21 @@ var main = {
 
         $.ajax({
             type: 'GET',
-            url: '/lotto',
+            url: '/random-lotto',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8'
         }).done(function (json){
 
-            //var ball = JSON.parse(JSON.stringify(json));
+            var lotto = JSON.parse(JSON.stringify(json));
 
             const element = document.getElementById("lotto");
             var tmp = "hi~";
 
             for(var i = 0; i < 6; i++){
 
-                element.innerHTML+=('<button type="button">'+tmp+'</button>');
+                element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto[i]+'</button>');
             }
+            element.innerHTML+=('<button type="button" class="primary">'+lotto[6]+'</button>');
             element.innerHTML+='<br/>';
 
         }).fail(function (error){
