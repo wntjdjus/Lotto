@@ -1,6 +1,5 @@
 package com.jutudy.lotto.web.dto;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,19 +7,19 @@ import lombok.NoArgsConstructor;
 @Getter
 public class RandomLottoResponseDto {
 
-    private int lottoNum1;
-    private int lottoNum2;
-    private int lottoNum3;
-    private int lottoNum4;
-    private int lottoNum5;
-    private int lottoNum6;
+    private int num1;
+    private int num2;
+    private int num3;
+    private int num4;
+    private int num5;
+    private int num6;
 
-    public RandomLottoResponseDto(int lottoNum1, int lottoNum2, int lottoNum3, int lottoNum4, int lottoNum5, int lottoNum6) {
-        this.lottoNum1 = lottoNum1;
-        this.lottoNum2 = lottoNum2;
-        this.lottoNum3 = lottoNum3;
-        this.lottoNum4 = lottoNum4;
-        this.lottoNum5 = lottoNum5;
-        this.lottoNum6 = lottoNum6;
+    public RandomLottoResponseDto(int num1, int num2, int num3, int num4, int num5, int num6) {
+        this.num1 = num1;
+        this.num2 = num2;
+        this.num3 = num3;
+        this.num4 = num4;
+        this.num5 = num5;
+        this.num6 = num6;
     }
 }
