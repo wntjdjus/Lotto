@@ -1,17 +1,21 @@
-package com.jutudy.lotto.service.Lotto;
+package com.jutudy.lotto.service;
 
-import com.jutudy.lotto.domain.Lotto.Lotto;
-import lombok.NoArgsConstructor;
+import com.jutudy.lotto.domain.Lotto;
+import com.jutudy.lotto.domain.RandomLottoRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Random;
 
+@RequiredArgsConstructor
 @Service
-@NoArgsConstructor
 public class LottoService {
 
-    public Lotto getRandomLotto() {
+    private final RandomLottoRepository randomLottoRepository;
+
+    public Lotto makeRandomLotto() {
 
         Random random = new Random();
         boolean[] chk = new boolean[46];
@@ -38,3 +42,5 @@ public class LottoService {
         return new Lotto(lotto[0],lotto[1],lotto[2],lotto[3],lotto[4],lotto[5],extraNum);
     }
 }
+
+

@@ -27,7 +27,7 @@ var main = {
 
         $.ajax({
             type: 'GET',
-            url: '/random-lotto',
+            url: '/random',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8'
         }).done(function (json){
@@ -36,12 +36,13 @@ var main = {
 
             const element = document.getElementById("lotto");
 
-            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.lottoNum1+'</button>');
-            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.lottoNum2+'</button>');
-            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.lottoNum3+'</button>');
-            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.lottoNum4+'</button>');
-            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.lottoNum5+'</button>');
-            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.lottoNum6+'</button>');
+            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.num1+'</button>');
+            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.num2+'</button>');
+            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.num3+'</button>');
+            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.num4+'</button>');
+            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.num5+'</button>');
+            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.num6+'</button>');
+            element.innerHTML+=('<button type="button" style="margin-left:0em">'+lotto.extraNum+'</button>');
             element.innerHTML+='<br/>';
 
         }).fail(function (error){

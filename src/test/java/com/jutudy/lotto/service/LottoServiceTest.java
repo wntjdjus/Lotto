@@ -1,10 +1,12 @@
-package com.jutudy.lotto.service.Lotto;
+package com.jutudy.lotto.service;
 
-import com.jutudy.lotto.domain.Lotto.Lotto;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import com.jutudy.lotto.domain.Lotto;
+import com.jutudy.lotto.domain.RandomLottoRepository;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.HashSet;
@@ -12,23 +14,23 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ExtendWith(SpringExtension.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 public class LottoServiceTest {
     private LottoService lottoService;
     private Lotto lotto;
     private Set<Integer> lottoSet = new HashSet<>();
 
-    @BeforeEach
-    public void setLottoService(){
-        lottoService = new LottoService();
+    @Before
+    public void setLottoService() {
+        lottoService = new LottoService(new RandomLottoRepository(new JdbcTemplate()));
     }
 
     @Test
-    public void getLandomLottoTest() {
-        lotto = lottoService.getRandomLotto();
+    public void TEST_랜덤로또생성() {
+        lotto = lottoService.makeRandomLotto();
 
-        for(int i = 0; i<=10000; i++) {
+        for (int i = 0; i <= 10000; i++) {
 
             lottoSet = new HashSet<>();
             assertThat(lotto.getNum1() >= 1 && lotto.getNum1() <= 45).isTrue();
