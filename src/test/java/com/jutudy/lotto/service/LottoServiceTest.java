@@ -1,6 +1,6 @@
 package com.jutudy.lotto.service;
 
-import com.jutudy.lotto.domain.Lotto;
+import com.jutudy.lotto.domain.RandomLotto;
 import com.jutudy.lotto.domain.RandomLottoRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,22 +17,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 public class LottoServiceTest {
-    private LottoService lottoService;
-    private Lotto lotto;
-    private Set<Integer> lottoSet = new HashSet<>();
+    private RandomLottoService lottoService;
 
     @Before
     public void setLottoService() {
-        lottoService = new LottoService(new RandomLottoRepository(new JdbcTemplate()));
+        lottoService = new RandomLottoService(new RandomLottoRepository(new JdbcTemplate()));
     }
 
     @Test
     public void TEST_랜덤로또생성() {
-        lotto = lottoService.makeRandomLotto();
+        RandomLotto lotto = lottoService.makeRandomLotto();
 
         for (int i = 0; i <= 10000; i++) {
 
-            lottoSet = new HashSet<>();
+            Set<Integer> lottoSet = new HashSet<>();
             assertThat(lotto.getNum1() >= 1 && lotto.getNum1() <= 45).isTrue();
             assertThat(lotto.getNum2() >= 1 && lotto.getNum2() <= 45).isTrue();
             assertThat(lotto.getNum3() >= 1 && lotto.getNum3() <= 45).isTrue();

@@ -22,7 +22,7 @@ public class RandomLottoRepositoryTest {
     private RandomLottoRepository randomLottoRepository;
 
     @Test
-    public void TEST_insert() {
+    public void 생성() {
         RandomLotto randomLotto = new RandomLotto(
                 "testId", "20211002", 1, 2, 3, 4, 5, 6, 7);
 
@@ -38,7 +38,7 @@ public class RandomLottoRepositoryTest {
     }
 
     @Test
-    public void TEST_중복생성() {
+    public void 중복생성() {
         RandomLotto randomLotto = new RandomLotto(
                 "test1", "20211010", 1, 2, 3, 4, 5, 6, 7);
         RandomLotto randomLotto1 = new RandomLotto(
@@ -57,6 +57,12 @@ public class RandomLottoRepositoryTest {
             assertThat(lottos.get(i).getDate()).isEqualTo(randomLotto.getDate()).isEqualTo(randomLotto1.getDate());
             assertThat(lottos.get(i).getNo()).isEqualTo(i+1);
         }
+    }
+
+    @Test
+    public void 조회결과없음(){
+        assertThat(randomLottoRepository.selectAll(new RandomLotto("test","00010101",1,1,1,1,1,1,1)).size())
+                .isEqualTo(0);
     }
 
 }

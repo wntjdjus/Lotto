@@ -1,9 +1,9 @@
 package com.jutudy.lotto.controller;
 
-import com.jutudy.lotto.domain.Lotto;
-import com.jutudy.lotto.service.LottoService;
+import com.jutudy.lotto.domain.RandomLotto;
+import com.jutudy.lotto.service.RandomLottoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LottoController {
 
-    private final LottoService lottoService;
+    private final RandomLottoService lottoService;
 
     @GetMapping("/random")
-    public ResponseEntity getLandomLotto(){
-        Lotto randomLotto = lottoService.makeRandomLotto();
-        return ResponseEntity.ok(randomLotto);
+    public ResponseEntity<RandomLotto> getRandomLotto(){
+        RandomLotto randomLotto = lottoService.makeRandomLotto();
+        return new ResponseEntity<>(randomLotto, HttpStatus.OK);
     }
 }
