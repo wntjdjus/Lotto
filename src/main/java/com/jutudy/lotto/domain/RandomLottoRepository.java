@@ -24,7 +24,10 @@ public class RandomLottoRepository {
                         "A.NUM4, " +
                         "A.NUM5, " +
                         "A.NUM6, " +
-                        "A.EXTRA_NUM," +
+                        "A.EXTRA_NUM, " +
+                        "A.BUY_YN, " +
+                        "A.HIT_YN, " +
+                        "A.RANK, " +
                         "A.FST_RG_TS, " +
                         "A.LT_CH_TS " +
                         "FROM " +
@@ -47,6 +50,9 @@ public class RandomLottoRepository {
                         rs.getInt("num5"),
                         rs.getInt("num6"),
                         rs.getInt("extra_num"),
+                        rs.getString("buy_yn"),
+                        rs.getString("hit_yn"),
+                        rs.getInt("rank"),
                         rs.getTimestamp("fst_rg_ts").toLocalDateTime(),
                         rs.getTimestamp("lt_ch_ts").toLocalDateTime()),
                 randomLotto.getUserId(), randomLotto.getDate());

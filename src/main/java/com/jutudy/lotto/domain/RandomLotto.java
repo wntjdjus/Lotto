@@ -21,6 +21,9 @@ public class RandomLotto{
     private int num5;
     private int num6;
     private int extraNum;
+    private String buyYn;
+    private String hitYn;
+    private int rank;
     private LocalDateTime fstRgTs;
     private LocalDateTime ltChTs;
 
