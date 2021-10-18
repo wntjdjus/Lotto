@@ -37,7 +37,7 @@ public class RandomLottoRepository {
                         "A.DATE = ? " +
                         "ORDER BY NO ";
 
-        List<RandomLotto> result = jdbcTemplate.query(
+        return jdbcTemplate.query(
                 query,
                 (rs, count) -> new RandomLotto(
                         rs.getString("user_id"),
@@ -56,8 +56,6 @@ public class RandomLottoRepository {
                         rs.getTimestamp("fst_rg_ts").toLocalDateTime(),
                         rs.getTimestamp("lt_ch_ts").toLocalDateTime()),
                 randomLotto.getUserId(), randomLotto.getDate());
-
-        return result;
     }
 
     public int insert(RandomLotto randomLotto) {
