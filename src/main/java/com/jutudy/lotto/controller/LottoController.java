@@ -1,6 +1,6 @@
 package com.jutudy.lotto.controller;
 
-import com.jutudy.lotto.domain.RandomLotto;
+import com.jutudy.lotto.domain.UserLotto;
 import com.jutudy.lotto.service.RandomLottoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,8 +15,8 @@ public class LottoController {
     private final RandomLottoService lottoService;
 
     @GetMapping("/random")
-    public ResponseEntity<RandomLotto> getRandomLotto(){
-        RandomLotto randomLotto = lottoService.makeRandomLotto();
-        return new ResponseEntity<>(randomLotto, HttpStatus.OK);
+    public ResponseEntity<UserLotto> getRandomLotto(){
+        //UserLotto randomLotto = lottoService.makeRandomLotto();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -22,9 +22,12 @@ var main = {
         $('#btn-reset').on('click', function (){
             _this.reset();
         });
+
+        $('#btn-api').on('click', function (){
+            _this.api();
+        });
     },
     select : function (){
-
         $.ajax({
             type: 'GET',
             url: '/random',
@@ -110,6 +113,18 @@ var main = {
 
         const element = document.getElementById("lotto");
         element.innerHTML = '';
+    },
+    api : function (){
+        $.ajax({
+            type: 'GET',
+            url: '/api',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8'
+        }).done(function (json){
+            alert(JSON.stringify(json));
+        }).fail(function (json){
+            alert(JSON.stringify(json));
+        })
     }
 };
 
