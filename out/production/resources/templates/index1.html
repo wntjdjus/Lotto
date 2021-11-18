@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
@@ -14,7 +14,12 @@
     <!-- Header -->
     <header id="header">
         <div class="inner">
-
+            <div th:if="${userName} == null">
+                <a href="/oauth2/authorization/google">구글로그인</a>
+                <a href="/oauth2/authorization/naver">네이버로그인</a>
+            </div>
+            <a href="/logout">로그아웃</a>
+            <a th:text="${userName}"></a>
             <!-- Logo -->
             <a href="/" class="logo">
                 <span class="symbol"><img src="/images/logo.svg" alt=""/></span><span class="title">로또의 모든 것</span>
@@ -43,6 +48,11 @@
 
     <!-- Main -->
     <div id="main">
+        <div class="inner">
+            <header>
+                <h1>로그인</h1>
+            </header>
+        </div>
         <div class="inner">
             <header>
                 <h1>랜덤 로또번호 뽑기</h1>

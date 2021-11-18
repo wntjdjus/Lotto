@@ -1,7 +1,9 @@
 package com.jutudy.lotto.web;
 
-import com.jutudy.lotto.domain.UserLotto;
-import com.jutudy.lotto.domain.UserLottoRepository;
+import com.jutudy.lotto.userlotto.domain.UserLotto;
+import com.jutudy.lotto.userlotto.domain.UserLottoRepository;
+import com.jutudy.lotto.userlotto.web.dto.UserLottoSaveRequestDto;
+import com.jutudy.lotto.userlotto.web.dto.UserLottoUpdateRequestDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
