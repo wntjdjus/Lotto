@@ -1,4 +1,4 @@
-package com.jutudy.lotto.tmp.domain;
+package com.jutudy.lotto.domain;
 
 import org.junit.After;
 import org.junit.Test;

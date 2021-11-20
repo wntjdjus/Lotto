@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Arrays;
 
 @Getter
 @NoArgsConstructor
@@ -50,26 +51,35 @@ public class UserLotto extends BaseTimeEntity {
 
     @Builder
     public UserLotto(String userId, int round, int num1, int num2, int num3, int num4, int num5, int num6, String buyYn) {
+        int[] nums = this.sort(num1, num2, num3, num4, num5, num6);
         this.userId = userId;
         this.round = round;
-        this.num1 = num1;
-        this.num2 = num2;
-        this.num3 = num3;
-        this.num4 = num4;
-        this.num5 = num5;
-        this.num6 = num6;
+        this.num1 = nums[0];
+        this.num2 = nums[1];
+        this.num3 = nums[2];
+        this.num4 = nums[3];
+        this.num5 = nums[4];
+        this.num6 = nums[5];
         this.buyYn = buyYn;
     }
 
     public void update(int num1, int num2, int num3, int num4, int num5, int num6, String buyYn, String hitYn, int rank) {
-        this.num1 = num1;
-        this.num2 = num2;
-        this.num3 = num3;
-        this.num4 = num4;
-        this.num5 = num5;
-        this.num6 = num6;
+        int[] nums = this.sort(num1, num2, num3, num4, num5, num6);
+        this.num1 = nums[0];
+        this.num2 = nums[1];
+        this.num3 = nums[2];
+        this.num4 = nums[3];
+        this.num5 = nums[4];
+        this.num6 = nums[5];
         this.buyYn = buyYn;
         this.hitYn = hitYn;
         this.rank = rank;
+    }
+
+    private int[] sort(int num1, int num2, int num3, int num4, int num5, int num6) {
+        int[] nums = {num1, num2, num3, num4, num5, num6};
+        Arrays.sort(nums);
+
+        return nums;
     }
 }
