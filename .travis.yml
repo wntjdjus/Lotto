@@ -18,9 +18,13 @@ before_install:
   - chmod +x gradlew
 
 before_deploy:
-  - zip -r Lotto *
-  - mkdir -p deploy
-  - mv Lotto.zip deploy/Lotto.zip
+  - mkdir -p before_deploy
+  - cp scripts/*.sh before-deploy/
+  - cp appspec.yml before-deploy/
+  - cp build/libs/*.jar before-deploy/
+  - cd before-deploy && zip -r before-deploy *
+  - cd ../ && mkdir -p deploy
+  - mv before-deploy/before-deploy.zip deploy/jutudy-springboot-webservice.zip
 
 deploy:
   - provider: s3
@@ -37,7 +41,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: jutudy-springboot-build   # s3 버킷
-    key: Lotto.zip  # s3 버킷에 있는 zip 파일 명
+    key: jutudy-springboot-webservice.zip  # s3 버킷에 있는 zip 파일 명
     bundle_type: zip
     application: jutudy-springboot-webservice
     deployment_group: jutudy-springboot-webservice-group
