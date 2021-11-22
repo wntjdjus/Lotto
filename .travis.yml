@@ -36,8 +36,8 @@ deploy:
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    bucket: jutudy-springboot-build
-    key: jutudy-springboot-webservice.zip
+    bucket: jutudy-springboot-build   # s3 버킷
+    key: Lotto.zip  # s3 버킷에 있는 zip 파일 명
     bundle_type: zip
     application: jutudy-springboot-webservice
     deployment_group: jutudy-springboot-webservice-group
