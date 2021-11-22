@@ -23,7 +23,7 @@ public class ProfileControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void profile_인증없이호출됨(){
+    public void profile_인증없이호출됨() throws Exception{
         String url = "http://localhost:"+port+"/profile";
         String expected = "default";
 
