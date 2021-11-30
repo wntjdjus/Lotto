@@ -57,7 +57,7 @@ public class UserLottoControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "GUEST")
     public void UserLotto_등록() throws Exception{
 
         // given
@@ -83,10 +83,6 @@ public class UserLottoControllerTest {
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(new ObjectMapper().writeValueAsString(requestDto)))
                 .andExpect(status().isOk());
-//        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
-//
-//        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-//        assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
         // then
         List<UserLotto> all = userLottoRepository.findAll();
@@ -101,7 +97,7 @@ public class UserLottoControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "GUEST")
     public void UserLotto_수정() throws Exception{
 
         // given
@@ -144,12 +140,6 @@ public class UserLottoControllerTest {
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(new ObjectMapper().writeValueAsString(requestDto)))
                 .andExpect(status().isOk());
-//        HttpEntity<UserLottoUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
-//
-//        ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
-//
-//        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-//        assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
         // then
         List<UserLotto> all = userLottoRepository.findAll();
@@ -164,6 +154,5 @@ public class UserLottoControllerTest {
         assertThat(all.get(0).getNum6()).isEqualTo(afNums[5]);
         assertThat(all.get(0).getBuyYn()).isEqualTo(buyYn);
         assertThat(all.get(0).getHitYn()).isEqualTo(hitYn);
-        //assertThat(all.get(0).getRank()).isNull();
     }
 }
