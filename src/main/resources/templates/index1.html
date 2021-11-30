@@ -18,8 +18,10 @@
                 <a href="/oauth2/authorization/google">구글로그인!</a>
                 <a href="/oauth2/authorization/naver">네이버로그인</a>
             </div>
-            <a href="/logout">로그아웃</a>
-            <a th:text="${userName}"></a>
+            <div th:if="${userName} != null">
+                <a th:text="${userName + '님 환영합니다!!'}"></a>
+                <a href="/logout">로그아웃</a>
+            </div>
             <!-- Logo -->
             <a href="/" class="logo">
                 <span class="symbol"><img src="/images/logo.svg" alt=""/></span><span class="title">로또의 모든 것</span>
@@ -50,16 +52,12 @@
     <div id="main">
         <div class="inner">
             <header>
-                <h1>로그인</h1>
-            </header>
-        </div>
-        <div class="inner">
-            <header>
                 <h1>랜덤 로또번호 뽑기</h1>
             </header>
+            <div id="lotto-round">992</div>
             <button type="button" class="btn btn-primary" id="btn-select">로또번호뽑기</button>
             <button type="button" class="btn btn-danger" id="btn-reset">초기화</button>
-            <button type="button" class="btn btn-primary" id="btn-api">API호출</button>
+            <button type="button" class="btn btn-primary" id="btn-myList">저장목록보기</button>
         </div>
         <div class="inner" id="lotto">
         </div>
@@ -120,6 +118,10 @@
         </div>
     </footer>
 </div>
+
+<script type="text/javascript" th:inline="javascript">
+    var userId = [[${userId}]];
+</script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

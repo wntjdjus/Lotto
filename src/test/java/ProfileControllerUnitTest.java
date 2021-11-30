@@ -1,4 +1,4 @@
-import com.jutudy.lotto.userlotto.ProfileController;
+import com.jutudy.lottoproject.userlotto.ProfileController;
 import org.junit.Test;
 import org.springframework.mock.env.MockEnvironment;
 
