@@ -1,8 +1,8 @@
 package com.jutudy.lottoproject.userlotto.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jutudy.lottoproject.userlotto.UserLotto;
-import com.jutudy.lottoproject.userlotto.UserLottoRepository;
+import com.jutudy.lottoproject.userlotto.domain.UserLotto;
+import com.jutudy.lottoproject.userlotto.domain.UserLottoRepository;
 import com.jutudy.lottoproject.userlotto.web.dto.UserLottoSaveRequestDto;
 import com.jutudy.lottoproject.userlotto.web.dto.UserLottoUpdateRequestDto;
 import org.junit.Before;

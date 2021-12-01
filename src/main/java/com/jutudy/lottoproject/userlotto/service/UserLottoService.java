@@ -1,7 +1,7 @@
 package com.jutudy.lottoproject.userlotto.service;
 
-import com.jutudy.lottoproject.userlotto.UserLotto;
-import com.jutudy.lottoproject.userlotto.UserLottoRepository;
+import com.jutudy.lottoproject.userlotto.domain.UserLotto;
+import com.jutudy.lottoproject.userlotto.domain.UserLottoRepository;
 import com.jutudy.lottoproject.userlotto.web.dto.UserLottoListRequestDto;
 import com.jutudy.lottoproject.userlotto.web.dto.UserLottoResponseDto;
 import com.jutudy.lottoproject.userlotto.web.dto.UserLottoSaveRequestDto;
@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -34,6 +35,14 @@ public class UserLottoService {
         return id;
     }
 
+    @Transactional
+    public void delete(Long id){
+        UserLotto userLotto = userLottoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저로또정보가 없습니다. id="+id));
+
+        userLottoRepository.delete(userLotto);
+    }
+
     public UserLottoResponseDto findById(Long id) {
         UserLotto entity = userLottoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저로또정보가 없습니다. id=" + id));
@@ -41,8 +50,15 @@ public class UserLottoService {
         return new UserLottoResponseDto(entity);
     }
 
-    public List<UserLottoResponseDto> findList(UserLottoListRequestDto requestDto) {
-        List<UserLotto> list;
-        return null;
+    public List<UserLottoResponseDto> findAll(String userId, int round) {
+        List<UserLottoResponseDto> responseDtos = new ArrayList<>();
+        List<UserLotto> list = userLottoRepository.findAllByRound(userId, round);
+        int size = list.size();
+        for(int i=0;i<size;i++){
+            UserLottoResponseDto responseDto = new UserLottoResponseDto(list.get(i));
+            responseDtos.add(responseDto);
+        }
+
+        return responseDtos;
     }
 }

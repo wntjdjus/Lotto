@@ -1,4 +1,4 @@
-package com.jutudy.lottoproject.userlotto;
+package com.jutudy.lottoproject.userlotto.domain;
 
 import lombok.Builder;
 import lombok.Getter;

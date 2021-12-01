@@ -1,4 +1,4 @@
-package com.jutudy.lottoproject.userlotto;
+package com.jutudy.lottoproject.userlotto.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

@@ -21,6 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests()
                     .antMatchers("/", "/assets/**", "/images/**", "/h2-console/**", "/profile").permitAll()
                     .antMatchers("/userlotto/**").hasRole(Role.GUEST.name())
+                    .antMatchers("/userlottos/**").hasRole(Role.GUEST.name())
                     .antMatchers("/random-lotto/**").permitAll()
                     .anyRequest().authenticated()
                 .and()

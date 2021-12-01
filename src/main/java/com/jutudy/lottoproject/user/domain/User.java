@@ -1,6 +1,6 @@
 package com.jutudy.lottoproject.user.domain;
 
-import com.jutudy.lottoproject.userlotto.BaseTimeEntity;
+import com.jutudy.lottoproject.userlotto.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

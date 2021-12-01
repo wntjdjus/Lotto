@@ -1,11 +1,12 @@
 package com.jutudy.lottoproject.userlotto.web.dto;
 
-import com.jutudy.lottoproject.userlotto.UserLotto;
+import com.jutudy.lottoproject.userlotto.domain.UserLotto;
 import lombok.Getter;
 
 @Getter
 public class UserLottoResponseDto {
 
+    private Long id;
     private String userId;
     private int round;
     private int num1;
@@ -19,6 +20,7 @@ public class UserLottoResponseDto {
     private int rank;
 
     public UserLottoResponseDto(UserLotto entity) {
+        this.id = entity.getId();
         this.userId = entity.getUserId();
         this.round = entity.getRound();
         this.num1 = entity.getNum1();

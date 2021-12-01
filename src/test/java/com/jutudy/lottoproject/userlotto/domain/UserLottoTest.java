@@ -1,6 +1,5 @@
 package com.jutudy.lottoproject.userlotto.domain;
 
-import com.jutudy.lottoproject.userlotto.UserLotto;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

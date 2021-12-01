@@ -1,7 +1,5 @@
 package com.jutudy.lottoproject.userlotto.domain;
 
-import com.jutudy.lottoproject.userlotto.UserLotto;
-import com.jutudy.lottoproject.userlotto.UserLottoRepository;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,6 +1,6 @@
 package com.jutudy.lottoproject.userlotto.web.dto;
 
-import com.jutudy.lottoproject.userlotto.UserLotto;
+import com.jutudy.lottoproject.userlotto.domain.UserLotto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
