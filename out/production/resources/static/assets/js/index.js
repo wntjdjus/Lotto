@@ -16,20 +16,24 @@ var main = {
             _this.update();
         });
 
-        $('#btn-delete').on('click', function (){
-            _this.delete();
-        });
+        // $('#btn-delete').on('click', function (){
+        //     _this.delete();
+        // });
 
         $('#btn-reset').on('click', function (){
             _this.reset();
         });
 
-        $('#btn-api').on('click', function (){
-            _this.api();
+        $('#btn-myList').on('click', function (){
+            _this.myList();
         });
 
         $('#lotto').on('click', '[id=btn-save]', function (){
            _this.save(this.parentElement.id);
+        });
+
+        $('#lotto').on('click', '[id=btn-delete]', function (){
+            _this.delete(this.parentElement.id);
         });
     },
     select : function (){
@@ -73,7 +77,6 @@ var main = {
 
     },
     save : function (id){
-
         var round = document.getElementById("lotto-round").textContent;
         var lotto = document.getElementById(id);
         var child = lotto.childNodes;
@@ -95,7 +98,6 @@ var main = {
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function (){
-            alert('랜덤로또번호 저장!');
             child[6].disabled = true;
         }).fail(function (error){
             alert(JSON.stringify(error));
@@ -122,17 +124,19 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-    delete : function () {
-        var id = $('#id').val();
+    delete : function (id) {
+        var round = document.getElementById("lotto-round").textContent;
+        var lotto = document.getElementById(id);
+        var child = lotto.childNodes;
+        var deleteId = child[1].textContent;
 
         $.ajax({
             type: 'DELETE',
-            url: '/api/v1/posts/'+id,
+            url: '/userlotto/'+deleteId,
             dataType: 'json',
             contentType:'application/json; charset=utf-8'
         }).done(function(){
-            alert('글이 삭제되었습니다.');
-            window.location.href="/";
+            lotto.innerHTML = '';
         }).fail(function(error){
             alert(JSON.stringify(error));
         });
@@ -143,14 +147,41 @@ var main = {
         element.innerHTML = '';
         idx = 1;
     },
-    api : function (){
+    myList : function (){
+        this.reset();
+        var round = document.getElementById("lotto-round").textContent;
+
         $.ajax({
             type: 'GET',
-            url: '/api',
+            url: '/userlottos/'+round,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8'
         }).done(function (json){
-            alert(JSON.stringify(json));
+            var lottos = JSON.parse(JSON.stringify(json));
+            var l = lottos.length;
+            const list = document.getElementById("lotto");
+
+            for(var i=0;i<l;i++){
+                var lotto = lottos[i];
+                var node = document.createElement("div");
+                node.id = "lotto"+idx;
+                node.innerHTML+=('<input type="hidden">'+lotto.id+'</input>');
+                node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num1+'</button>');
+                node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num2+'</button>');
+                node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num3+'</button>');
+                node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num4+'</button>');
+                node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num5+'</button>');
+                node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num6+'</button>');
+                if(userId != null){
+                    node.innerHTML+=('<button type="button" id="btn-delete" style="margin-left:0em">삭제</button>');
+                }
+                node.innerHTML+='<br/>';
+
+                list.appendChild(node);
+
+            }
+
+            idx = -1;
         }).fail(function (json){
             alert(JSON.stringify(json));
         })

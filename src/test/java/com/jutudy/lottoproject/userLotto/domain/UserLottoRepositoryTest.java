@@ -1,4 +1,4 @@
-package com.jutudy.lottoproject.userlotto.domain;
+package com.jutudy.lottoproject.userLotto.domain;
 
 import org.junit.After;
 import org.junit.Test;
@@ -86,5 +86,34 @@ public class UserLottoRepositoryTest {
 
         assertThat(userLotto.getCreatedDate()).isAfter(now);
         assertThat(userLotto.getModifiedDate()).isAfter(now);
+    }
+
+    @Test
+    public void 회차별저장내역조회(){
+        //given
+        UserLotto userLotto = UserLotto.builder()
+                .userId("test")
+                .round(1)
+                .num1(1)
+                .num2(2)
+                .num3(3)
+                .num4(4)
+                .num5(5)
+                .num6(6)
+                .buyYn("N").build();
+        userLottoRepository.save(userLotto);
+
+        //when
+        List<UserLotto> lottos = userLottoRepository.findAllByRound("test",1);
+
+        //then
+        assertThat(lottos.get(0).getUserId()).isEqualTo("test");
+        assertThat(lottos.get(0).getRound()).isEqualTo(1);
+
+        //when
+        lottos = userLottoRepository.findAllByRound("test",2);
+
+        //then
+        assertThat(lottos).isEmpty();
     }
 }

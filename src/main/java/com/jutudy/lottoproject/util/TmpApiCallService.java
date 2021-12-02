@@ -1,4 +1,4 @@
-package com.jutudy.lottoproject.lotto.service;
+package com.jutudy.lottoproject.util;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class ApiCallService {
+public class TmpApiCallService {
 
     private final String baseUrl = "https://kox947ka1a.execute-api.ap-northeast-2.amazonaws.com/prod/users";
 

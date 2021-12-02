@@ -10,6 +10,7 @@ import java.util.*;
 @NoArgsConstructor
 public class Lotto {
 
+    private int round;
     private int num1;
     private int num2;
     private int num3;
@@ -19,8 +20,9 @@ public class Lotto {
     private int bonusNum;
 
     @Builder
-    public Lotto(int num1, int num2, int num3, int num4, int num5, int num6, int bonusNum) {
+    public Lotto(int round, int num1, int num2, int num3, int num4, int num5, int num6, int bonusNum) {
         int[] nums = this.sort(num1, num2, num3, num4, num5, num6);
+        this.round = round;
         this.num1 = nums[0];
         this.num2 = nums[1];
         this.num3 = nums[2];

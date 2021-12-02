@@ -1,4 +1,4 @@
-package com.jutudy.lottoproject.userlotto.web.dto;
+package com.jutudy.lottoproject.userLotto.web.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -15,11 +15,9 @@ public class UserLottoUpdateRequestDto {
     private int num5;
     private int num6;
     private String buyYn;
-    private String hitYn;
-    private int score;
 
     @Builder
-    public UserLottoUpdateRequestDto(int num1, int num2, int num3, int num4, int num5, int num6, String buyYn, String hitYn, int score) {
+    public UserLottoUpdateRequestDto(int num1, int num2, int num3, int num4, int num5, int num6, String buyYn) {
         this.num1 = num1;
         this.num2 = num2;
         this.num3 = num3;
@@ -27,7 +25,5 @@ public class UserLottoUpdateRequestDto {
         this.num5 = num5;
         this.num6 = num6;
         this.buyYn = buyYn;
-        this.hitYn = hitYn;
-        this.score = score;
     }
 }

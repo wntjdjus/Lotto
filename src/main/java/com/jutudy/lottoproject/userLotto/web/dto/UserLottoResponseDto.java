@@ -1,6 +1,6 @@
-package com.jutudy.lottoproject.userlotto.web.dto;
+package com.jutudy.lottoproject.userLotto.web.dto;
 
-import com.jutudy.lottoproject.userlotto.domain.UserLotto;
+import com.jutudy.lottoproject.userLotto.domain.UserLotto;
 import lombok.Getter;
 
 @Getter
@@ -16,7 +16,6 @@ public class UserLottoResponseDto {
     private int num5;
     private int num6;
     private String buyYn;
-    private String hitYn;
     private int rank;
 
     public UserLottoResponseDto(UserLotto entity) {
@@ -30,7 +29,6 @@ public class UserLottoResponseDto {
         this.num5 = entity.getNum5();
         this.num6 = entity.getNum6();
         this.buyYn = entity.getBuyYn();
-        this.hitYn = entity.getHitYn();
         this.rank = entity.getRank();
     }
 }

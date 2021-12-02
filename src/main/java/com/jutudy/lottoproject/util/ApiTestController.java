@@ -1,6 +1,6 @@
-package com.jutudy.lottoproject.lotto.web;
+package com.jutudy.lottoproject.util;
 
-import com.jutudy.lottoproject.lotto.service.ApiCallService;
+import com.jutudy.lottoproject.util.ApiCallService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

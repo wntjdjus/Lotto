@@ -1,4 +1,4 @@
-package com.jutudy.lottoproject.userlotto.domain;
+package com.jutudy.lottoproject.userLotto.domain;
 
 import org.junit.Test;
 

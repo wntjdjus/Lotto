@@ -1,4 +1,4 @@
-package com.jutudy.lottoproject.userlotto.web;
+package com.jutudy.lottoproject.userLotto.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;

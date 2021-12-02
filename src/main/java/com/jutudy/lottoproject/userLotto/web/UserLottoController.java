@@ -1,16 +1,15 @@
-package com.jutudy.lottoproject.userlotto.web;
+package com.jutudy.lottoproject.userLotto.web;
 
 import com.jutudy.lottoproject.config.auth.LoginUser;
 import com.jutudy.lottoproject.config.auth.dto.SessionUser;
-import com.jutudy.lottoproject.userlotto.service.UserLottoService;
-import com.jutudy.lottoproject.userlotto.web.dto.UserLottoResponseDto;
-import com.jutudy.lottoproject.userlotto.web.dto.UserLottoSaveRequestDto;
-import com.jutudy.lottoproject.userlotto.web.dto.UserLottoUpdateRequestDto;
+import com.jutudy.lottoproject.userLotto.service.UserLottoService;
+import com.jutudy.lottoproject.userLotto.web.dto.UserLottoResponseDto;
+import com.jutudy.lottoproject.userLotto.web.dto.UserLottoSaveRequestDto;
+import com.jutudy.lottoproject.userLotto.web.dto.UserLottoUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController

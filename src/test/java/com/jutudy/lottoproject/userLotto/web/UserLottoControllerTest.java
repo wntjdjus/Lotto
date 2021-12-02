@@ -1,10 +1,10 @@
-package com.jutudy.lottoproject.userlotto.web;
+package com.jutudy.lottoproject.userLotto.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jutudy.lottoproject.userlotto.domain.UserLotto;
-import com.jutudy.lottoproject.userlotto.domain.UserLottoRepository;
-import com.jutudy.lottoproject.userlotto.web.dto.UserLottoSaveRequestDto;
-import com.jutudy.lottoproject.userlotto.web.dto.UserLottoUpdateRequestDto;
+import com.jutudy.lottoproject.userLotto.domain.UserLotto;
+import com.jutudy.lottoproject.userLotto.domain.UserLottoRepository;
+import com.jutudy.lottoproject.userLotto.web.dto.UserLottoSaveRequestDto;
+import com.jutudy.lottoproject.userLotto.web.dto.UserLottoUpdateRequestDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -114,13 +114,11 @@ public class UserLottoControllerTest {
                 .num4(nums[3])
                 .num5(nums[4])
                 .num6(nums[5])
-                .buyYn("N")
                 .build());
 
         Long id = userLotto.getId();
         int[] afNums = {45,44,43,42,41,40};
         String buyYn = "Y";
-        String hitYn = "N";
 
         UserLottoUpdateRequestDto requestDto = UserLottoUpdateRequestDto.builder()
                 .num1(afNums[0])
@@ -130,7 +128,6 @@ public class UserLottoControllerTest {
                 .num5(afNums[4])
                 .num6(afNums[5])
                 .buyYn(buyYn)
-                .hitYn(hitYn)
                 .build();
 
         String url = "http://localhost:"+port+"/userlotto/"+id;
@@ -153,6 +150,5 @@ public class UserLottoControllerTest {
         assertThat(all.get(0).getNum5()).isEqualTo(afNums[4]);
         assertThat(all.get(0).getNum6()).isEqualTo(afNums[5]);
         assertThat(all.get(0).getBuyYn()).isEqualTo(buyYn);
-        assertThat(all.get(0).getHitYn()).isEqualTo(hitYn);
     }
 }

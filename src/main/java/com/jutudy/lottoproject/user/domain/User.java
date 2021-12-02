@@ -1,6 +1,6 @@
 package com.jutudy.lottoproject.user.domain;
 
-import com.jutudy.lottoproject.userlotto.domain.BaseTimeEntity;
+import com.jutudy.lottoproject.userLotto.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,4 +48,5 @@ public class User extends BaseTimeEntity {
     public String getRoleKey(){
         return this.role.getKey();
     }
+
 }

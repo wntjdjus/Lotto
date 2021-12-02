@@ -1,6 +1,6 @@
-package com.jutudy.lottoproject.userlotto.web.dto;
+package com.jutudy.lottoproject.userLotto.web.dto;
 
-import com.jutudy.lottoproject.userlotto.domain.UserLotto;
+import com.jutudy.lottoproject.userLotto.domain.UserLotto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,7 +40,6 @@ public class UserLottoSaveRequestDto {
                 .num4(num4)
                 .num5(num5)
                 .num6(num6)
-                .buyYn("N")
                 .build();
     }
 }

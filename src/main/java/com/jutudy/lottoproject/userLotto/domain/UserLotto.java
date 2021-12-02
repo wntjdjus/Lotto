@@ -1,4 +1,4 @@
-package com.jutudy.lottoproject.userlotto.domain;
+package com.jutudy.lottoproject.userLotto.domain;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -43,14 +43,8 @@ public class UserLotto extends BaseTimeEntity {
     @Column(length = 1, nullable = false)
     private String buyYn;
 
-    @Column(length = 1)
-    private String hitYn;
-
-    @Column(length = 1)
-    private int rank;
-
     @Builder
-    public UserLotto(String userId, int round, int num1, int num2, int num3, int num4, int num5, int num6, String buyYn) {
+    public UserLotto(String userId, int round, int num1, int num2, int num3, int num4, int num5, int num6) {
         int[] nums = this.sort(num1, num2, num3, num4, num5, num6);
         this.userId = userId;
         this.round = round;
@@ -60,10 +54,10 @@ public class UserLotto extends BaseTimeEntity {
         this.num4 = nums[3];
         this.num5 = nums[4];
         this.num6 = nums[5];
-        this.buyYn = buyYn;
+        this.buyYn = "N";
     }
 
-    public void update(int num1, int num2, int num3, int num4, int num5, int num6, String buyYn, String hitYn, int rank) {
+    public UserLotto update(int num1, int num2, int num3, int num4, int num5, int num6, String buyYn) {
         int[] nums = this.sort(num1, num2, num3, num4, num5, num6);
         this.num1 = nums[0];
         this.num2 = nums[1];
@@ -72,8 +66,8 @@ public class UserLotto extends BaseTimeEntity {
         this.num5 = nums[4];
         this.num6 = nums[5];
         this.buyYn = buyYn;
-        this.hitYn = hitYn;
-        this.rank = rank;
+
+        return this;
     }
 
     private int[] sort(int num1, int num2, int num3, int num4, int num5, int num6) {

@@ -1,4 +1,4 @@
-package com.jutudy.lottoproject.userlotto.web;
+package com.jutudy.lottoproject.userLotto.web;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
