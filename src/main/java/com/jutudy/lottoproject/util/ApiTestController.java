@@ -16,7 +16,7 @@ public class ApiTestController {
     @GetMapping("/api")
     public ResponseEntity callApi(){
 
-        apiCallService.solve();
+        //apiCallService.solve();
 
         return new ResponseEntity(HttpStatus.OK);
     }

@@ -21,4 +21,8 @@ public class LottoController {
         logger.debug(responseDto.toString());
         return responseDto;
     }
+
+    @GetMapping("/test")
+    public void error() {
+    }
 }

@@ -29,6 +29,6 @@ public class UserLottoResponseDto {
         this.num5 = entity.getNum5();
         this.num6 = entity.getNum6();
         this.buyYn = entity.getBuyYn();
-        this.rank = entity.getRank();
+        //this.rank = entity.getRank();
     }
 }

@@ -1,6 +1,6 @@
 package com.jutudy.lottoproject.winLotto.domain;
 
-import com.jutudy.lottoproject.userLotto.domain.BaseTimeEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +8,8 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
-public class WinLotto{
+@Entity
+public class WinLotto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,4 +51,20 @@ public class WinLotto{
     @Column(length = 20, nullable = false)
     private long firstTotalReward;
 
+    @Builder
+    public WinLotto(Long id, int round, String date, int num1, int num2, int num3, int num4, int num5, int num6, int bonusNum, long firstReward, int firstWinnerCnt, long firstTotalReward) {
+        this.id = id;
+        this.round = round;
+        this.date = date;
+        this.num1 = num1;
+        this.num2 = num2;
+        this.num3 = num3;
+        this.num4 = num4;
+        this.num5 = num5;
+        this.num6 = num6;
+        this.bonusNum = bonusNum;
+        this.firstReward = firstReward;
+        this.firstWinnerCnt = firstWinnerCnt;
+        this.firstTotalReward = firstTotalReward;
+    }
 }
