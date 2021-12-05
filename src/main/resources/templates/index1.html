@@ -7,6 +7,9 @@
     <noscript>
         <link rel="stylesheet" href="/assets/css/noscript.css"/>
     </noscript>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body class="is-preload">
 <!-- Wrapper -->
@@ -51,13 +54,17 @@
     <!-- Main -->
     <div id="main">
         <div class="inner">
+            <a id="1">!!!!</a>
             <header>
                 <h1>랜덤 로또번호 뽑기</h1>
             </header>
             <div id="lotto-round">992</div>
-            <button type="button" class="btn btn-primary" id="btn-select">로또번호뽑기</button>
+            <button type="button" class="btn btn-default" id="btn-select">로또번호뽑기</button>
             <button type="button" class="btn btn-danger" id="btn-reset">초기화</button>
-            <button type="button" class="btn btn-primary" id="btn-myList">저장목록보기</button>
+            <button type="button" class="btn btn-default" id="btn-myList">저장목록보기</button>
+            <table style="position: relative; width: 50%; height: 100%; clear: both;">
+                <td style="float: left; text-align: center; width: 14%; border: 2px solid red; box-sizing: border-box">1</td>
+            </table>
         </div>
         <div class="inner" id="lotto">
         </div>

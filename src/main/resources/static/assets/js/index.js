@@ -33,7 +33,7 @@ var main = {
         });
 
         $('#lotto').on('click', '[id=btn-delete]', function (){
-            _this.delete(this.parentElement.id);
+            _this.delete(this.parentElement);
         });
     },
     select : function (){
@@ -124,11 +124,9 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-    delete : function (id) {
+    delete : function (parent) {
         var round = document.getElementById("lotto-round").textContent;
-        var lotto = document.getElementById(id);
-        var child = lotto.childNodes;
-        var deleteId = child[1].textContent;
+        var deleteId = parent.getAttribute("value");
 
         $.ajax({
             type: 'DELETE',
@@ -136,7 +134,7 @@ var main = {
             dataType: 'json',
             contentType:'application/json; charset=utf-8'
         }).done(function(){
-            lotto.innerHTML = '';
+            parent.innerHTML = '';
         }).fail(function(error){
             alert(JSON.stringify(error));
         });
@@ -164,8 +162,7 @@ var main = {
             for(var i=0;i<l;i++){
                 var lotto = lottos[i];
                 var node = document.createElement("div");
-                node.id = "lotto"+idx;
-                node.innerHTML+=('<input type="hidden">'+lotto.id+'</input>');
+                node.setAttribute("value",lotto.id);
                 node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num1+'</button>');
                 node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num2+'</button>');
                 node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num3+'</button>');
@@ -178,7 +175,7 @@ var main = {
                 node.innerHTML+='<br/>';
 
                 list.appendChild(node);
-
+                idx += 1;
             }
 
             idx = -1;
