@@ -56,11 +56,10 @@ public class WinLottoServiceTests {
 
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void 조회_회차_실패(){
         Long round = 9999L;
         WinLottoResponseDto responseDto = winLottoService.selectWinLottoByRound(round);
-        assertThat(responseDto).isNull();
     }
 
 }
