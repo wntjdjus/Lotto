@@ -1,6 +1,7 @@
 package com.jutudy.lottoproject.userLotto.domain;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,20 @@ public class UserLottoRepositoryTest {
 
     @Autowired
     UserLottoRepository userLottoRepository;
+
+    @Before
+    public void makeUserLotto(){
+        userLottoRepository.save(UserLotto.builder()
+                .userId("test")
+                .round(1)
+                .num1(1)
+                .num2(2)
+                .num3(3)
+                .num4(4)
+                .num5(5)
+                .num6(6)
+                .build());
+    }
 
     @After
     public void cleanup(){
@@ -39,7 +54,6 @@ public class UserLottoRepositoryTest {
                 .num4(nums[3])
                 .num5(nums[4])
                 .num6(nums[5])
-                .buyYn("N")
                 .build());
 
         List<UserLotto> userLottoList = userLottoRepository.findAll();
@@ -71,7 +85,6 @@ public class UserLottoRepositoryTest {
                         .num4(4)
                         .num5(5)
                         .num6(6)
-                        .buyYn("N")
                         .build()
         );
 
@@ -100,20 +113,32 @@ public class UserLottoRepositoryTest {
                 .num4(4)
                 .num5(5)
                 .num6(6)
-                .buyYn("N").build();
+                .build();
         userLottoRepository.save(userLotto);
 
         //when
-        List<UserLotto> lottos = userLottoRepository.findAllByRound("test",1);
+        List<UserLotto> lottos = userLottoRepository.findAllByUserIdAndRoundOrderByCreatedDate("test",1);
 
         //then
         assertThat(lottos.get(0).getUserId()).isEqualTo("test");
         assertThat(lottos.get(0).getRound()).isEqualTo(1);
 
         //when
-        lottos = userLottoRepository.findAllByRound("test",2);
+        lottos = userLottoRepository.findAllByUserIdAndRoundOrderByCreatedDate("test",2);
 
         //then
         assertThat(lottos).isEmpty();
+    }
+
+    @Test
+    public void 라운드별목록조회(){
+        List<UserLotto> userLotto = userLottoRepository.findAllByUserIdAndRoundOrderByCreatedDate("test",1);
+
+        assertThat(userLotto.get(0).getUserId()).isEqualTo("test");
+        assertThat(userLotto.get(0).getRound()).isEqualTo(1);
+
+        userLotto = userLottoRepository.findAllByUserIdAndRoundOrderByCreatedDate("test",2);
+
+        assertThat(userLotto).isEmpty();
     }
 }

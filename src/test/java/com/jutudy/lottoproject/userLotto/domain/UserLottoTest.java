@@ -18,7 +18,6 @@ public class UserLottoTest {
                 .num4(1)
                 .num5(14)
                 .num6(44)
-                .buyYn("N")
                 .build();
 
         assertThat(userLotto.getNum1()).isLessThan(userLotto.getNum2());

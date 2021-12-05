@@ -25,8 +25,11 @@ public class ApiCallService {
             URL targetUrl = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) targetUrl.openConnection();
             conn.setRequestMethod(method);
-            for (Map.Entry<String, String> entry : header.entrySet()) {
-                conn.setRequestProperty(entry.getKey(), entry.getValue());
+            if (header != null) {
+
+                for (Map.Entry<String, String> entry : header.entrySet()) {
+                    conn.setRequestProperty(entry.getKey(), entry.getValue());
+                }
             }
 
             if (body != null) {

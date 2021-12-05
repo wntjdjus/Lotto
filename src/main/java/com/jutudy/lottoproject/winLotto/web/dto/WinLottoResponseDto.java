@@ -1,21 +1,27 @@
 package com.jutudy.lottoproject.winLotto.web.dto;
 
+import com.jutudy.lottoproject.winLotto.domain.WinLotto;
 import lombok.Data;
+import org.springframework.beans.BeanUtils;
 
 @Data
 public class WinLottoResponseDto {
 
     private Long id;
-    private int round;
+    private Long round;
     private String date;
-    private int num1;
-    private int num2;
-    private int num3;
-    private int num4;
-    private int num5;
-    private int num6;
-    private int bonusNum;
-    private long firstReward;
-    private int firstWinnerCnt;
-    private long firstTotalReward;
+    private Long num1;
+    private Long num2;
+    private Long num3;
+    private Long num4;
+    private Long num5;
+    private Long num6;
+    private Long bonusNum;
+    private Long firstReward;
+    private Long firstWinnerCnt;
+    private Long firstTotalReward;
+
+    public WinLottoResponseDto(WinLotto entity) {
+        BeanUtils.copyProperties(entity, this);
+    }
 }

@@ -16,44 +16,43 @@ public class WinLotto {
     private Long id;
 
     @Column(length = 5, nullable = false)
-    private int round;
+    private Long round;
 
     @Column(length = 8, nullable = false)
     private String date;
 
     @Column(length = 2, nullable = false)
-    private int num1;
+    private Long num1;
 
     @Column(length = 2, nullable = false)
-    private int num2;
+    private Long num2;
 
     @Column(length = 2, nullable = false)
-    private int num3;
+    private Long num3;
 
     @Column(length = 2, nullable = false)
-    private int num4;
+    private Long num4;
 
     @Column(length = 2, nullable = false)
-    private int num5;
+    private Long num5;
 
     @Column(length = 2, nullable = false)
-    private int num6;
+    private Long num6;
 
     @Column(length = 2, nullable = false)
-    private int bonusNum;
+    private Long bonusNum;
 
     @Column(length = 20, nullable = false)
-    private long firstReward;
+    private Long firstReward;
 
     @Column(length = 10, nullable = false)
-    private int firstWinnerCnt;
+    private Long firstWinnerCnt;
 
     @Column(length = 20, nullable = false)
-    private long firstTotalReward;
+    private Long firstTotalReward;
 
     @Builder
-    public WinLotto(Long id, int round, String date, int num1, int num2, int num3, int num4, int num5, int num6, int bonusNum, long firstReward, int firstWinnerCnt, long firstTotalReward) {
-        this.id = id;
+    public WinLotto(Long round, String date, Long num1, Long num2, Long num3, Long num4, Long num5, Long num6, Long bonusNum, Long firstReward, Long firstWinnerCnt, Long firstTotalReward) {
         this.round = round;
         this.date = date;
         this.num1 = num1;

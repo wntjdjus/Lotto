@@ -57,7 +57,7 @@ public class UserLottoControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "GUEST")
+    @WithMockUser(roles = "USER")
     public void UserLotto_등록() throws Exception{
 
         // given
@@ -97,7 +97,7 @@ public class UserLottoControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "GUEST")
+    @WithMockUser(roles = "USER")
     public void UserLotto_수정() throws Exception{
 
         // given

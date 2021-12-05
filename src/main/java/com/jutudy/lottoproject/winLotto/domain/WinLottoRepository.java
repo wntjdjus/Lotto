@@ -5,4 +5,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WinLottoRepository extends JpaRepository<WinLotto, Long> {
+
+    WinLotto findByRound(Long round);
+
+    WinLotto findTopByOrderByRoundDesc();
 }

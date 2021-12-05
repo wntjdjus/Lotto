@@ -1,4 +1,4 @@
-package com.jutudy.lottoproject.exception;
+package com.jutudy.lottoproject.error;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -7,13 +7,13 @@ import org.springframework.http.HttpStatus;
 
 @NoArgsConstructor
 @Getter
-public class ExceptionInfo {
+public class ErrorInfo {
 
     private int errorCode;
     private String errorMessage;
 
     @Builder
-    public ExceptionInfo(HttpStatus status) {
+    public ErrorInfo(HttpStatus status) {
         this.errorCode = status.value();
         this.errorMessage = status.name();
     }

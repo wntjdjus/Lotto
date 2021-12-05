@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface UserLottoRepository extends JpaRepository<UserLotto, Long> {
 
-    @Query("select l from UserLotto l where l.userId = :userId and l.round = :round order by l.createdDate")
-    List<UserLotto> findAllByRound(@Param("userId") String userId, @Param("round") int round);
+    List<UserLotto> findAllByUserIdAndRoundOrderByCreatedDate(String userId, int round);
 }

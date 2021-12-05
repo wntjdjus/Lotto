@@ -51,7 +51,7 @@ public class UserLottoService {
 
     public List<UserLottoResponseDto> findAll(String userId, int round) {
         List<UserLottoResponseDto> responseDtos = new ArrayList<>();
-        List<UserLotto> list = userLottoRepository.findAllByRound(userId, round);
+        List<UserLotto> list = userLottoRepository.findAllByUserIdAndRoundOrderByCreatedDate(userId, round);
         int size = list.size();
         for (int i = 0; i < size; i++) {
             UserLottoResponseDto responseDto = new UserLottoResponseDto(list.get(i));
