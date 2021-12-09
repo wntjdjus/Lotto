@@ -66,6 +66,9 @@ var main = {
             if(userId != null){
                 node.innerHTML+=('<button type="button" id="btn-save" style="margin-left:0em">저장</button>');
             }
+
+            node.innerHTML+=('<button type="button" id="btn-save" style="margin-left:0em">저장</button>');
+
             node.innerHTML+='<br/>';
 
             list.appendChild(node);
@@ -173,6 +176,8 @@ var main = {
                     node.innerHTML+=('<button type="button" id="btn-delete" style="margin-left:0em">삭제</button>');
                 }
                 node.innerHTML+='<br/>';
+
+
 
                 list.appendChild(node);
                 idx += 1;

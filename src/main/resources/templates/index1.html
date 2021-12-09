@@ -7,11 +7,13 @@
     <noscript>
         <link rel="stylesheet" href="/assets/css/noscript.css"/>
     </noscript>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <!-- 자바스크립트 -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body class="is-preload">
+<div id="div_load_image" style="position: absolute; top: 50%; left: 50%; width: 0px;
+    height: 0px; z-index: 9999; background: #f0f0f0; filter: alpha(opacity=50);
+    opacity: alpha*0.5; margin: auto; padding: 0; text-align: center">
+
+</div>
 <!-- Wrapper -->
 <div id="wrapper">
     <!-- Header -->
@@ -65,6 +67,7 @@
             <table style="position: relative; width: 50%; height: 100%; clear: both;">
                 <td style="float: left; text-align: center; width: 14%; border: 2px solid red; box-sizing: border-box">1</td>
             </table>
+            <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>
         </div>
         <div class="inner" id="lotto">
         </div>

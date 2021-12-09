@@ -49,8 +49,6 @@ public class ApiCallService {
             if (conn.getResponseCode() != 200) {
                 System.out.println("Fail : " + conn.getResponseCode());
                 throw new RuntimeException("Fail : " + conn.getResponseCode());
-            } else {
-                System.out.println("성공");
             }
 
             JSONParser parser = new JSONParser();

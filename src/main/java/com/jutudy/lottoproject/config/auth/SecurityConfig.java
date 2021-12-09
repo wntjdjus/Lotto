@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/userlotto/**").hasRole(Role.USER.name())
                     .antMatchers("/userlottos/**").hasRole(Role.USER.name())
                     .antMatchers("/random-lotto/**").permitAll()
+                    .antMatchers("/win-lotto/**").permitAll()
                     .antMatchers("/test/**").permitAll()
                     .anyRequest().authenticated()
                 .and()

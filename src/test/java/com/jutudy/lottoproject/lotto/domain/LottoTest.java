@@ -15,12 +15,12 @@ public class LottoTest {
         lotto.randomize();
 
         //then
-        assertThat(lotto.getNum1()).isBetween(1,45);
-        assertThat(lotto.getNum2()).isBetween(1,45);
-        assertThat(lotto.getNum3()).isBetween(1,45);
-        assertThat(lotto.getNum4()).isBetween(1,45);
-        assertThat(lotto.getNum5()).isBetween(1,45);
-        assertThat(lotto.getNum6()).isBetween(1,45);
+        assertThat(lotto.getNum1()).isBetween(1L,45L);
+        assertThat(lotto.getNum2()).isBetween(1L,45L);
+        assertThat(lotto.getNum3()).isBetween(1L,45L);
+        assertThat(lotto.getNum4()).isBetween(1L,45L);
+        assertThat(lotto.getNum5()).isBetween(1L,45L);
+        assertThat(lotto.getNum6()).isBetween(1L,45L);
 
         assertThat(lotto.getNum1()).isLessThan(lotto.getNum2());
         assertThat(lotto.getNum2()).isLessThan(lotto.getNum3());

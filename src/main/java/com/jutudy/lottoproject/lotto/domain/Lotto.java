@@ -10,18 +10,18 @@ import java.util.*;
 @NoArgsConstructor
 public class Lotto {
 
-    private int round;
-    private int num1;
-    private int num2;
-    private int num3;
-    private int num4;
-    private int num5;
-    private int num6;
-    private int bonusNum;
+    private long round;
+    private long num1;
+    private long num2;
+    private long num3;
+    private long num4;
+    private long num5;
+    private long num6;
+    private long bonusNum;
 
     @Builder
-    public Lotto(int round, int num1, int num2, int num3, int num4, int num5, int num6, int bonusNum) {
-        int[] nums = this.sort(num1, num2, num3, num4, num5, num6);
+    public Lotto(long round, long num1, long num2, long num3, long num4, long num5, long num6, long bonusNum) {
+        long[] nums = this.sort(num1, num2, num3, num4, num5, num6);
         this.round = round;
         this.num1 = nums[0];
         this.num2 = nums[1];
@@ -32,19 +32,19 @@ public class Lotto {
         this.bonusNum = bonusNum;
     }
 
-    private int[] sort(int num1, int num2, int num3, int num4, int num5, int num6) {
-        int[] nums = {num1, num2, num3, num4, num5, num6};
+    private long[] sort(long num1, long num2, long num3, long num4, long num5, long num6) {
+        long[] nums = {num1, num2, num3, num4, num5, num6};
         Arrays.sort(nums);
 
         return nums;
     }
 
     public void randomize() {
-        Set<Integer> set = new HashSet<>();
+        Set<Long> set = new HashSet<>();
         Random random = new Random();
-        List<Integer> list = new ArrayList<>();
+        List<Long> list = new ArrayList<>();
         while (list.size() < 6) {
-            int num = random.nextInt(45) + 1;
+            long num = random.nextInt(45) + 1;
             if (set.add(num)) {
                 list.add(num);
             }
