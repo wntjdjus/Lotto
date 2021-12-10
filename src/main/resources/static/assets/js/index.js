@@ -67,7 +67,11 @@ var main = {
                 node.innerHTML+=('<button type="button" id="btn-save" style="margin-left:0em">저장</button>');
             }
 
-            node.innerHTML+=('<button type="button" id="btn-save" style="margin-left:0em">저장</button>');
+            node.innerHTML+=('<a style="margin-left:0em">'+lotto.pastWin1Cnt+'</a>');
+            node.innerHTML+=('<a style="margin-left:0em">'+lotto.pastWin2Cnt+'</a>');
+            node.innerHTML+=('<a style="margin-left:0em">'+lotto.pastWin3Cnt+'</a>');
+            node.innerHTML+=('<a style="margin-left:0em">'+lotto.pastWin4Cnt+'</a>');
+            node.innerHTML+=('<a style="margin-left:0em">'+lotto.pastWin5Cnt+'</a>');
 
             node.innerHTML+='<br/>';
 
