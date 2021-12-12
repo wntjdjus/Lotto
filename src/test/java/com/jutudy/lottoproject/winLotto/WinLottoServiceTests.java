@@ -65,28 +65,4 @@ public class WinLottoServiceTests {
         WinLottoResponseDto responseDto = winLottoService.selectWinLottoByRound(round);
     }
 
-    @Test
-    public void 최근토요일까지저장(){
-        Long round = 992L;
-        int r = 992;
-        String date = "20211204";
-        winLottoService.insertWinLotto(1,date);
-
-        WinLottoResponseDto dto = winLottoService.selectWinLottoByRound(round);
-
-        List<WinLotto> list = winLottoRepository.findAll();
-
-        assertThat(dto).isNotNull();
-        assertThat(dto.getDate()).isEqualTo(date);
-        assertThat(list.size()).isEqualTo(r);
-    }
-
-    @Test
-    public void 최근로또조회(){
-        int round = 992;
-        String date = "20211204";
-        WinLottoResponseDto dto = winLottoService.selectRecentWinLotto();
-        assertThat(dto.getRound()).isEqualTo((long)round);
-    }
-
 }
