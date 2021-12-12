@@ -40,7 +40,7 @@ public class UserLottoController {
     }
 
     @GetMapping("/userlottos/{round}")
-    public List<UserLottoResponseDto> findAll(@PathVariable int round, @LoginUser SessionUser user){
+    public List<UserLottoResponseDto> findAll(@PathVariable long round, @LoginUser SessionUser user){
         return userLottoService.findAll(user.getEmail(), round);
     }
 }

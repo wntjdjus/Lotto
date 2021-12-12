@@ -10,16 +10,16 @@ import lombok.NoArgsConstructor;
 public class UserLottoSaveRequestDto {
 
     private String userId;
-    private int round;
-    private int num1;
-    private int num2;
-    private int num3;
-    private int num4;
-    private int num5;
-    private int num6;
+    private long round;
+    private long num1;
+    private long num2;
+    private long num3;
+    private long num4;
+    private long num5;
+    private long num6;
 
     @Builder
-    public UserLottoSaveRequestDto(String userId, int round, int num1, int num2, int num3, int num4, int num5, int num6) {
+    public UserLottoSaveRequestDto(String userId, long round, long num1, long num2, long num3, long num4, long num5, long num6) {
         this.userId = userId;
         this.round = round;
         this.num1 = num1;

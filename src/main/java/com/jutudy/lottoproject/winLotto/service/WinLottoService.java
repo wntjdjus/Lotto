@@ -21,26 +21,32 @@ public class WinLottoService {
     private final String lottoUrl = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=";
 
     private WinLotto winLottoApiCall(long round) {
-        JSONObject object = apiCallService.apiCall(lottoUrl + round, "GET", null, null);
-        if (object.get("returnValue").equals("success")) {
-            System.out.println(object.get("drwNo"));
-            WinLotto winLotto = WinLotto.builder()
-                    .round((Long) object.get("drwNo"))
-                    .date(object.get("drwNoDate").toString().replaceAll("-", ""))
-                    .num1((Long) object.get("drwtNo1"))
-                    .num2((Long) object.get("drwtNo2"))
-                    .num3((Long) object.get("drwtNo3"))
-                    .num4((Long) object.get("drwtNo4"))
-                    .num5((Long) object.get("drwtNo5"))
-                    .num6((Long) object.get("drwtNo6"))
-                    .bonusNum((Long) object.get("bnusNo"))
-                    .firstReward((Long) object.get("firstWinamnt"))
-                    .firstWinnerCnt((Long) object.get("firstPrzwnerCo"))
-                    .firstTotalReward((Long) object.get("firstAccumamnt"))
-                    .build();
+        try {
 
-            return winLotto;
-        } else {
+            JSONObject object = apiCallService.apiCall(lottoUrl + round, "GET", null, null);
+            if (object.get("returnValue").equals("success")) {
+                System.out.println(object.get("drwNo"));
+                WinLotto winLotto = WinLotto.builder()
+                        .round((Long) object.get("drwNo"))
+                        .date(object.get("drwNoDate").toString().replaceAll("-", ""))
+                        .num1((Long) object.get("drwtNo1"))
+                        .num2((Long) object.get("drwtNo2"))
+                        .num3((Long) object.get("drwtNo3"))
+                        .num4((Long) object.get("drwtNo4"))
+                        .num5((Long) object.get("drwtNo5"))
+                        .num6((Long) object.get("drwtNo6"))
+                        .bonusNum((Long) object.get("bnusNo"))
+                        .firstReward((Long) object.get("firstWinamnt"))
+                        .firstWinnerCnt((Long) object.get("firstPrzwnerCo"))
+                        .firstTotalReward((Long) object.get("firstAccumamnt"))
+                        .build();
+
+                return winLotto;
+
+            } else {
+                return null;
+            }
+        }catch (Exception e){
             throw new RuntimeException();
         }
     }
@@ -49,6 +55,7 @@ public class WinLottoService {
         WinLotto winLotto = winLottoRepository.findByRound(round);
         if (winLotto == null) {
             winLotto = winLottoApiCall(round);
+            winLottoRepository.save(winLotto);
         }
 
         return new WinLottoResponseDto(winLotto);

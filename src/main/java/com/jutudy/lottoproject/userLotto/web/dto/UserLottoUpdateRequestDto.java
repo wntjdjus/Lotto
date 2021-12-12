@@ -8,16 +8,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserLottoUpdateRequestDto {
 
-    private int num1;
-    private int num2;
-    private int num3;
-    private int num4;
-    private int num5;
-    private int num6;
+    private long num1;
+    private long num2;
+    private long num3;
+    private long num4;
+    private long num5;
+    private long num6;
     private String buyYn;
 
     @Builder
-    public UserLottoUpdateRequestDto(int num1, int num2, int num3, int num4, int num5, int num6, String buyYn) {
+    public UserLottoUpdateRequestDto(long num1, long num2, long num3, long num4, long num5, long num6, String buyYn) {
         this.num1 = num1;
         this.num2 = num2;
         this.num3 = num3;

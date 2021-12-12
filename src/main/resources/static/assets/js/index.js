@@ -1,44 +1,25 @@
 var idx = 1;
 var main = {
     // init에 메서드 등록해줘야 사용 가능
-    init : function (){
+    init: function () {
         var _this = this;
 
-        $('#btn-select').on('click', function (){
+        $('#btn-select').on('click', function () {
             _this.select();
         });
 
-        // $('#btn-save').on('click', function (){
-        //     _this.save();
-        // });
-
-        $('#btn-update').on('click', function (){
-            _this.update();
-        });
-
-        // $('#btn-delete').on('click', function (){
-        //     _this.delete();
-        // });
-
-        $('#btn-reset').on('click', function (){
+        $('#btn-reset').on('click', function () {
             _this.reset();
         });
 
-        $('#btn-myList').on('click', function (){
-            _this.myList();
+        $('#lotto').on('click', '[id=btn-save]', function () {
+            _this.save(this.parentElement);
         });
 
-        $('#lotto').on('click', '[id=btn-save]', function (){
-           _this.save(this.parentElement.id);
-        });
-
-        $('#lotto').on('click', '[id=btn-delete]', function (){
-            _this.delete(this.parentElement);
-        });
     },
-    select : function (){
+    select: function () {
 
-        if(idx == -1){
+        if (idx == -1) {
             const element = document.getElementById("lotto");
             element.innerHTML = '';
             idx = 1;
@@ -49,47 +30,64 @@ var main = {
             url: '/random-lotto',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8'
-        }).done(function (json){
+        }).done(function (json) {
 
             var lotto = JSON.parse(JSON.stringify(json));
 
             const list = document.getElementById("lotto");
 
             var node = document.createElement("div");
-            node.id = "lotto"+idx;
-            node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num1+'</button>');
-            node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num2+'</button>');
-            node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num3+'</button>');
-            node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num4+'</button>');
-            node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num5+'</button>');
-            node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num6+'</button>');
-            if(userId != null){
-                node.innerHTML+=('<button type="button" id="btn-save" style="margin-left:0em">저장</button>');
-            }
 
-            node.innerHTML+=('<a style="margin-left:0em">'+lotto.pastWin1Cnt+'</a>');
-            node.innerHTML+=('<a style="margin-left:0em">'+lotto.pastWin2Cnt+'</a>');
-            node.innerHTML+=('<a style="margin-left:0em">'+lotto.pastWin3Cnt+'</a>');
-            node.innerHTML+=('<a style="margin-left:0em">'+lotto.pastWin4Cnt+'</a>');
-            node.innerHTML+=('<a style="margin-left:0em">'+lotto.pastWin5Cnt+'</a>');
+            var lottoF = `<div class="border border-danger fs-6 align-middle lotto-num">`;
+            var lottoE = `</div>`;
+            var button = `<button type="button" class="btn btn-outline-primary btn-sm" id="btn-save" class="">저장</button>`;
+            node.innerHTML += (lottoF + lotto.num1 + lottoE);
+            node.innerHTML += (lottoF + lotto.num2 + lottoE);
+            node.innerHTML += (lottoF + lotto.num3 + lottoE);
+            node.innerHTML += (lottoF + lotto.num4 + lottoE);
+            node.innerHTML += (lottoF + lotto.num5 + lottoE);
+            node.innerHTML += (lottoF + lotto.num6 + lottoE);
+            node.innerHTML += (button);
 
-            node.innerHTML+='<br/>';
+            var colapse = `
+                <a class="" data-bs-toggle="collapse" href="#lottoCol`+idx+`" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                </svg>
+                </a>
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="lottoCol`+idx+`">
+                            <div class="card card-body">
+                                <div class="fs-6">해당 번호 과거 당첨 횟수</div>
+                                <div class="fs-6">1등 : `+lotto.pastWin1Cnt+`번</div>
+                                <div class="fs-6">2등 : `+lotto.pastWin2Cnt+`번</div>
+                                <div class="fs-6">3등 : `+lotto.pastWin3Cnt+`번</div>
+                                <div class="fs-6">4등 : `+lotto.pastWin4Cnt+`번</div>
+                                <div class="fs-6">5등 : `+lotto.pastWin5Cnt+`번</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            node.innerHTML += colapse;
 
             list.appendChild(node);
             idx += 1;
 
-        }).fail(function (error){
+        }).fail(function (error) {
             alert(JSON.stringify(error));
         });
 
     },
-    save : function (id){
-        var round = document.getElementById("lotto-round").textContent;
-        var lotto = document.getElementById(id);
-        var child = lotto.childNodes;
+    save: function (parent) {
+        if(!this.loginCheck()){
+            return false;
+        }
+        var child = parent.childNodes;
         var data = {
             "userId": userId,
-            "round": round,
+            "round": nextRound,
             "num1": child[0].textContent,
             "num2": child[1].textContent,
             "num3": child[2].textContent,
@@ -104,93 +102,25 @@ var main = {
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
-        }).done(function (){
+        }).done(function () {
             child[6].disabled = true;
-        }).fail(function (error){
+        }).fail(function (error) {
             alert(JSON.stringify(error));
         });
     },
-    update : function (){
-        var data = {
-            title: $('#title').val(),
-            content: $('#content').val()
-        };
-
-        var id = $('#id').val();
-
-        $.ajax({
-            type: 'PUT',
-            url: '/api/v1/posts/'+id,
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function(){
-            alert('글이 수정되었습니다.');
-            window.location.href="/";
-        }).fail(function (error){
-            alert(JSON.stringify(error));
-        });
-    },
-    delete : function (parent) {
-        var round = document.getElementById("lotto-round").textContent;
-        var deleteId = parent.getAttribute("value");
-
-        $.ajax({
-            type: 'DELETE',
-            url: '/userlotto/'+deleteId,
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8'
-        }).done(function(){
-            parent.innerHTML = '';
-        }).fail(function(error){
-            alert(JSON.stringify(error));
-        });
-    },
-    reset : function (){
+    reset: function () {
 
         const element = document.getElementById("lotto");
         element.innerHTML = '';
         idx = 1;
     },
-    myList : function (){
-        this.reset();
-        var round = document.getElementById("lotto-round").textContent;
-
-        $.ajax({
-            type: 'GET',
-            url: '/userlottos/'+round,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8'
-        }).done(function (json){
-            var lottos = JSON.parse(JSON.stringify(json));
-            var l = lottos.length;
-            const list = document.getElementById("lotto");
-
-            for(var i=0;i<l;i++){
-                var lotto = lottos[i];
-                var node = document.createElement("div");
-                node.setAttribute("value",lotto.id);
-                node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num1+'</button>');
-                node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num2+'</button>');
-                node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num3+'</button>');
-                node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num4+'</button>');
-                node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num5+'</button>');
-                node.innerHTML+=('<button type="button" name="num" style="margin-left:0em">'+lotto.num6+'</button>');
-                if(userId != null){
-                    node.innerHTML+=('<button type="button" id="btn-delete" style="margin-left:0em">삭제</button>');
-                }
-                node.innerHTML+='<br/>';
-
-
-
-                list.appendChild(node);
-                idx += 1;
-            }
-
-            idx = -1;
-        }).fail(function (json){
-            alert(JSON.stringify(json));
-        })
+    loginCheck: function (){
+        if(userId == null){
+            alert("로그인 후 가능합니다.");
+            return false;
+        }else{
+            return true;
+        }
     }
 };
 

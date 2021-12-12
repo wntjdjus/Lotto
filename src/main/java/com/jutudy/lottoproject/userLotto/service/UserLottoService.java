@@ -5,6 +5,8 @@ import com.jutudy.lottoproject.userLotto.domain.UserLottoRepository;
 import com.jutudy.lottoproject.userLotto.web.dto.UserLottoResponseDto;
 import com.jutudy.lottoproject.userLotto.web.dto.UserLottoSaveRequestDto;
 import com.jutudy.lottoproject.userLotto.web.dto.UserLottoUpdateRequestDto;
+import com.jutudy.lottoproject.winLotto.domain.WinLotto;
+import com.jutudy.lottoproject.winLotto.domain.WinLottoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import java.util.List;
 public class UserLottoService {
 
     private final UserLottoRepository userLottoRepository;
+    private final WinLottoRepository winLottoRepository;
 
     @Transactional
     public Long save(UserLottoSaveRequestDto requestDto) {
@@ -49,12 +52,17 @@ public class UserLottoService {
         return new UserLottoResponseDto(entity);
     }
 
-    public List<UserLottoResponseDto> findAll(String userId, int round) {
+    public List<UserLottoResponseDto> findAll(String userId, long round) {
         List<UserLottoResponseDto> responseDtos = new ArrayList<>();
         List<UserLotto> list = userLottoRepository.findAllByUserIdAndRoundOrderByCreatedDate(userId, round);
+        WinLotto winLotto = winLottoRepository.findByRound(round);
         int size = list.size();
+
         for (int i = 0; i < size; i++) {
             UserLottoResponseDto responseDto = new UserLottoResponseDto(list.get(i));
+            if(winLotto != null){
+                responseDto.findRank(winLotto);
+            }
             responseDtos.add(responseDto);
         }
 

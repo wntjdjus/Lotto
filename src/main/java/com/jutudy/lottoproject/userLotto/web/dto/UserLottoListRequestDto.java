@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 public class UserLottoListRequestDto {
 
     private String userId;
-    private int round;
+    private long round;
 
     @Builder
-    public UserLottoListRequestDto(String userId, int round) {
+    public UserLottoListRequestDto(String userId, long round) {
         this.userId = userId;
         this.round = round;
     }

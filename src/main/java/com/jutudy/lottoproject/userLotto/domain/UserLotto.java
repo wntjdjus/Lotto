@@ -20,32 +20,32 @@ public class UserLotto extends BaseTimeEntity {
     private String userId;
 
     @Column(length = 5, nullable = false)
-    private int round;
+    private long round;
 
     @Column(length = 2, nullable = false)
-    private int num1;
+    private long num1;
 
     @Column(length = 2, nullable = false)
-    private int num2;
+    private long num2;
 
     @Column(length = 2, nullable = false)
-    private int num3;
+    private long num3;
 
     @Column(length = 2, nullable = false)
-    private int num4;
+    private long num4;
 
     @Column(length = 2, nullable = false)
-    private int num5;
+    private long num5;
 
     @Column(length = 2, nullable = false)
-    private int num6;
+    private long num6;
 
     @Column(length = 1, nullable = false)
     private String buyYn;
 
     @Builder
-    public UserLotto(String userId, int round, int num1, int num2, int num3, int num4, int num5, int num6) {
-        int[] nums = this.sort(num1, num2, num3, num4, num5, num6);
+    public UserLotto(String userId, long round, long num1, long num2, long num3, long num4, long num5, long num6) {
+        long[] nums = this.sort(num1, num2, num3, num4, num5, num6);
         this.userId = userId;
         this.round = round;
         this.num1 = nums[0];
@@ -57,8 +57,8 @@ public class UserLotto extends BaseTimeEntity {
         this.buyYn = "N";
     }
 
-    public UserLotto update(int num1, int num2, int num3, int num4, int num5, int num6, String buyYn) {
-        int[] nums = this.sort(num1, num2, num3, num4, num5, num6);
+    public UserLotto update(long num1, long num2, long num3, long num4, long num5, long num6, String buyYn) {
+        long[] nums = this.sort(num1, num2, num3, num4, num5, num6);
         this.num1 = nums[0];
         this.num2 = nums[1];
         this.num3 = nums[2];
@@ -70,8 +70,8 @@ public class UserLotto extends BaseTimeEntity {
         return this;
     }
 
-    private int[] sort(int num1, int num2, int num3, int num4, int num5, int num6) {
-        int[] nums = {num1, num2, num3, num4, num5, num6};
+    private long[] sort(long num1, long num2, long num3, long num4, long num5, long num6) {
+        long[] nums = {num1, num2, num3, num4, num5, num6};
         Arrays.sort(nums);
 
         return nums;

@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface UserLottoRepository extends JpaRepository<UserLotto, Long> {
 
-    List<UserLotto> findAllByUserIdAndRoundOrderByCreatedDate(String userId, int round);
+    List<UserLotto> findAllByUserIdAndRoundOrderByCreatedDate(String userId, long round);
 }
