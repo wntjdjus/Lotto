@@ -2,8 +2,8 @@ var idx = 1;
 var main = {
     // init에 메서드 등록해줘야 사용 가능
     init: function () {
-        var _this = this;
 
+        var _this = this;
         const roundList = document.getElementById("my-lotto-round");
         for (var i = recentRound; i > 0; i--) {
             var node = document.createElement("option");
@@ -14,17 +14,19 @@ var main = {
             }
             roundList.appendChild(node);
         }
+        _this.changeRound();
 
         $('#btn-reset').on('click', function () {
             _this.reset();
         });
 
-        $('#btn-myList').on('click', function () {
-            _this.myList();
-        });
-
         $('#lotto').on('click', '[id=btn-delete]', function () {
             _this.delete(this.parentElement);
+        });
+
+
+        $('#my-lotto-round').change(function (){
+            _this.changeRound();
         });
     },
     delete: function (parent) {
@@ -49,7 +51,15 @@ var main = {
         element.innerHTML = '';
         idx = 1;
     },
-    myList: function () {
+    loginCheck: function () {
+        if (userId == null) {
+            alert("로그인 후 가능합니다.");
+            return false;
+        } else {
+            return true;
+        }
+    },
+    changeRound : function (){
         if (!this.loginCheck()) {
             return false;
         }
@@ -70,7 +80,6 @@ var main = {
 
             for (var i = 0; i < l; i++) {
                 var lotto = lottos[i];
-
                 var node = document.createElement("div");
                 node.setAttribute("value", lotto.id);
                 var lottoF = `<div class="border border-danger fs-6 align-middle lotto-num">`;
@@ -97,14 +106,6 @@ var main = {
         }).fail(function (json) {
             alert(JSON.stringify(json));
         })
-    },
-    loginCheck: function () {
-        if (userId == null) {
-            alert("로그인 후 가능합니다.");
-            return false;
-        } else {
-            return true;
-        }
     }
 };
 
