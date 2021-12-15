@@ -42,7 +42,7 @@ public class UserLottoService {
         UserLotto userLotto = userLottoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저로또정보가 없습니다. id=" + id));
 
-        userLottoRepository.delete(userLotto);
+        userLotto.delete();
     }
 
     public UserLottoResponseDto findById(Long id) {
@@ -54,7 +54,7 @@ public class UserLottoService {
 
     public List<UserLottoResponseDto> findAll(String userId, long round) {
         List<UserLottoResponseDto> responseDtos = new ArrayList<>();
-        List<UserLotto> list = userLottoRepository.findAllByUserIdAndRoundOrderByCreatedDate(userId, round);
+        List<UserLotto> list = userLottoRepository.findAllByUserIdAndRoundAndDelYnOrderByCreatedDate(userId, round,"N");
         WinLotto winLotto = winLottoRepository.findByRound(round);
         int size = list.size();
 

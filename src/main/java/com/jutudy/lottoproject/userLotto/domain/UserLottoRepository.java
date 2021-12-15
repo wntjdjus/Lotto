@@ -9,4 +9,6 @@ import java.util.List;
 public interface UserLottoRepository extends JpaRepository<UserLotto, Long> {
 
     List<UserLotto> findAllByUserIdAndRoundOrderByCreatedDate(String userId, long round);
+
+    List<UserLotto> findAllByUserIdAndRoundAndDelYnOrderByCreatedDate(String userId, long round, String delYn);
 }

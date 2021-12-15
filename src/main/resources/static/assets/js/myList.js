@@ -8,7 +8,7 @@ var main = {
         for (var i = recentRound; i > 0; i--) {
             var node = document.createElement("option");
             node.setAttribute("value", i);
-            node.textContent = i+'회';
+            node.textContent = i + '회';
             if (i == recentRound) {
                 node.selected = true;
             }
@@ -25,7 +25,7 @@ var main = {
         });
 
 
-        $('#my-lotto-round').change(function (){
+        $('#my-lotto-round').change(function () {
             _this.changeRound();
         });
     },
@@ -41,8 +41,8 @@ var main = {
             contentType: 'application/json; charset=utf-8'
         }).done(function () {
             parent.innerHTML = '';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
+        }).fail(function () {
+            alert("삭제 에러!");
         });
     },
     reset: function () {
@@ -59,7 +59,7 @@ var main = {
             return true;
         }
     },
-    changeRound : function (){
+    changeRound: function () {
         if (!this.loginCheck()) {
             return false;
         }
@@ -78,33 +78,46 @@ var main = {
             var l = lottos.length;
             const list = document.getElementById("lotto");
 
-            for (var i = 0; i < l; i++) {
-                var lotto = lottos[i];
-                var node = document.createElement("div");
-                node.setAttribute("value", lotto.id);
-                var lottoF = `<div class="border border-danger fs-6 align-middle lotto-num">`;
-                var lottoE = `</div>`;
-                var button = `<button type="button" class="btn btn-outline-danger btn-sm" id="btn-delete" class="">삭제</button>`;
-                var rankF = `<button type="button" class="btn btn-outline-primary btn-sm" id="" class="" disabled>`;
-                var rankE = `</button>`;
-                node.innerHTML += (lottoF + lotto.num1 + lottoE);
-                node.innerHTML += (lottoF + lotto.num2 + lottoE);
-                node.innerHTML += (lottoF + lotto.num3 + lottoE);
-                node.innerHTML += (lottoF + lotto.num4 + lottoE);
-                node.innerHTML += (lottoF + lotto.num5 + lottoE);
-                node.innerHTML += (lottoF + lotto.num6 + lottoE);
-                node.innerHTML += (button);
-                if(lotto.rank != 0){
-                    node.innerHTML += (rankF + lotto.rank + '등!' + rankE);
-                }
+            if (l == 0) {
+                var errorMsg = "해당 회차에 저장한 번호가 없습니다.";
+                var error = document.createElement("a");
+                error.textContent = errorMsg;
+                list.appendChild(error);
+            } else {
 
-                list.appendChild(node);
-                idx += 1;
+                for (var i = 0; i < l; i++) {
+                    var lotto = lottos[i];
+                    var node = document.createElement("div");
+                    node.setAttribute("value", lotto.id);
+                    var lottoF = `<div class="border border-danger fs-6 align-middle lotto-num">`;
+                    var lottoE = `</div>`;
+                    var button = `<button type="button" class="btn btn-outline-danger btn-sm" id="btn-delete" class="">삭제</button>`;
+                    var rankF = `<button type="button" class="btn btn-outline-primary btn-sm" id="" class="" disabled>`;
+                    var rankE = `</button>`;
+                    node.innerHTML += (lottoF + lotto.num1 + lottoE);
+                    node.innerHTML += (lottoF + lotto.num2 + lottoE);
+                    node.innerHTML += (lottoF + lotto.num3 + lottoE);
+                    node.innerHTML += (lottoF + lotto.num4 + lottoE);
+                    node.innerHTML += (lottoF + lotto.num5 + lottoE);
+                    node.innerHTML += (lottoF + lotto.num6 + lottoE);
+                    node.innerHTML += (button);
+
+                    var t_rank = "꽝!";
+                    if (lotto.rank == 0) {
+                        t_rank = "추첨전";
+                    } else if (lotto.rank <= 5) {
+                        t_rank = lotto.rank + "등!";
+                    }
+                    node.innerHTML += (rankF + t_rank + rankE);
+
+                    list.appendChild(node);
+                    idx += 1;
+                }
             }
 
             idx = -1;
-        }).fail(function (json) {
-            alert(JSON.stringify(json));
+        }).fail(function () {
+            alert("조회 에러!");
         })
     }
 };

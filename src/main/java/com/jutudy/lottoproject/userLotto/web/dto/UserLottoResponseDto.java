@@ -87,6 +87,7 @@ public class UserLottoResponseDto {
                 this.rank = 5;
                 break;
             default:
+                this.rank = 6;
                 break;
         }
     }

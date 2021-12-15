@@ -75,8 +75,8 @@ var main = {
             list.appendChild(node);
             idx += 1;
 
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
+        }).fail(function () {
+            alert("랜덤로또발췌에러!");
         });
 
     },
@@ -104,8 +104,8 @@ var main = {
             data: JSON.stringify(data)
         }).done(function () {
             child[6].disabled = true;
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
+        }).fail(function () {
+            alert("저장에러!");
         });
     },
     reset: function () {

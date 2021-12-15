@@ -43,6 +43,9 @@ public class UserLotto extends BaseTimeEntity {
     @Column(length = 1, nullable = false)
     private String buyYn;
 
+    @Column(length = 1, nullable = false)
+    private String delYn;
+
     @Builder
     public UserLotto(String userId, long round, long num1, long num2, long num3, long num4, long num5, long num6) {
         long[] nums = this.sort(num1, num2, num3, num4, num5, num6);
@@ -55,6 +58,7 @@ public class UserLotto extends BaseTimeEntity {
         this.num5 = nums[4];
         this.num6 = nums[5];
         this.buyYn = "N";
+        this.delYn = "N";
     }
 
     public UserLotto update(long num1, long num2, long num3, long num4, long num5, long num6, String buyYn) {
@@ -75,5 +79,10 @@ public class UserLotto extends BaseTimeEntity {
         Arrays.sort(nums);
 
         return nums;
+    }
+
+    public UserLotto delete(){
+        this.delYn = "Y";
+        return this;
     }
 }

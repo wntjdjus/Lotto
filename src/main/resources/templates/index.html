@@ -28,7 +28,7 @@
                         <a class="nav-link" aria-current="page" href="/">랜덤 로또번호 뽑기</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/myList">내가 저장한 번호 보기</a>
+                        <a th:if="${userName} != null" class="nav-link" href="/myList">내가 저장한 번호 보기</a>
                     </li>
                 </ul>
             </div>

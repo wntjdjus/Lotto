@@ -46,7 +46,7 @@ public class WinLottoService {
             } else {
                 return null;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException();
         }
     }
@@ -54,8 +54,8 @@ public class WinLottoService {
     public WinLottoResponseDto selectWinLottoByRound(Long round) {
         WinLotto winLotto = winLottoRepository.findByRound(round);
         if (winLotto == null) {
-            winLotto = winLottoApiCall(round);
-            winLottoRepository.save(winLotto);
+            insertWinLotto(round);
+            winLotto = winLottoRepository.findByRound(round);
         }
 
         return new WinLottoResponseDto(winLotto);
@@ -68,26 +68,25 @@ public class WinLottoService {
         WinLotto winLotto = winLottoRepository.findTopByOrderByDateDesc();
         if (winLotto == null || !winLotto.getDate().equals(recentSat)) {
             long round = 0;
-            if(winLotto != null){
+            if (winLotto != null) {
                 round = winLotto.getRound();
             }
-            insertWinLotto(round + 1, recentSat);
+            insertWinLotto(round + 1);
             winLotto = winLottoRepository.findTopByOrderByRoundDesc();
         }
 
         return new WinLottoResponseDto(winLotto);
     }
 
-    public void insertWinLotto(long round, String stopDate) {
+    public void insertWinLotto(long round) {
         WinLotto winLotto = null;
-        while (winLotto == null || !winLotto.getDate().equals(stopDate)) {
-            try {
-                winLotto = winLottoApiCall(round);
-                winLottoRepository.save(winLotto);
-                round += 1;
-            } catch (Exception e) {
-                continue;
+        while (true) {
+            winLotto = winLottoApiCall(round);
+            if (winLotto == null) {
+                break;
             }
+            winLottoRepository.save(winLotto);
+            round += 1;
         }
     }
 
