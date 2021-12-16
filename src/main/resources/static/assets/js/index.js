@@ -25,9 +25,23 @@ var main = {
             idx = 1;
         }
 
+        var uri = "/random-lotto";
+        var query = "?";
+        var isQuery = false;
+        const exceptRoundCheck = document.getElementById("exceptRoundCheck");
+        if(exceptRoundCheck.value == "Y"){
+            const exceptRoundNum = document.getElementById("exceptRoundNum");
+            query += "except-round-num="+exceptRoundNum.options[exceptRoundNum.selectedIndex].value;
+            isQuery = true;
+        }
+
+        if(isQuery){
+            uri += query;
+        }
+
         $.ajax({
             type: 'GET',
-            url: '/random-lotto',
+            url: uri,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8'
         }).done(function (json) {
@@ -125,3 +139,22 @@ var main = {
 };
 
 main.init();
+
+$(document).ready(function (){
+    $("input:checkbox").on('click', function (){
+        var isChecked = false;
+        if($(this).prop('checked')){
+            isChecked = true;
+        }
+        if(this.id == 'exceptRoundCheck'){
+            const roundList = document.getElementById("exceptRoundNum");
+            if(isChecked){
+                roundList.style.display = "block";
+                this.value = "Y";
+            }else{
+                roundList.style.display = "none";
+                this.value = "N";
+            }
+        }
+    });
+});

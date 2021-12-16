@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -16,7 +17,8 @@ public class LottoController {
     private final LottoService lottoService;
 
     @GetMapping("/random-lotto")
-    public RandomLottoResponseDto getRandomLotto() {
+    public RandomLottoResponseDto getRandomLotto(@RequestParam(value = "except-round-num", required = false) String exceptRoundNum) {
+        System.out.println(exceptRoundNum);
         RandomLottoResponseDto responseDto = lottoService.getRandomLotto();
         logger.debug(responseDto.toString());
         return responseDto;

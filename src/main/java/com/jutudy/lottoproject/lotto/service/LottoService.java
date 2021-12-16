@@ -27,6 +27,17 @@ public class LottoService {
         return responseDto;
     }
 
+    public RandomLottoResponseDto getRandomLotto(int exceptRoundNum){
+        RandomLottoResponseDto responseDto = null;
+
+        Lotto lotto = Lotto.builder().build();
+        lotto.randomize();
+        responseDto = new RandomLottoResponseDto(lotto);
+        responseDto = findPastWinCnt(responseDto);
+
+        return responseDto;
+    }
+
     public RandomLottoResponseDto findPastWinCnt(RandomLottoResponseDto dto) {
         List<WinLotto> winLottos = winLottoRepository.findAll();
         Set<Long> winLottoSet = null;
