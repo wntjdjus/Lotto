@@ -17,21 +17,30 @@ public class LottoService {
 
     private final WinLottoRepository winLottoRepository;
 
-    public RandomLottoResponseDto getRandomLotto() {
-        RandomLottoResponseDto responseDto = null;
-        Lotto lotto = Lotto.builder().build();
-        lotto.randomize();
-        responseDto = new RandomLottoResponseDto(lotto);
-        responseDto = findPastWinCnt(responseDto);
-
-        return responseDto;
-    }
-
-    public RandomLottoResponseDto getRandomLotto(int exceptRoundNum){
+    public RandomLottoResponseDto getRandomLotto(String exceptRoundNum){
         RandomLottoResponseDto responseDto = null;
 
-        Lotto lotto = Lotto.builder().build();
-        lotto.randomize();
+        Set<Long> exceptNumSet = new HashSet<>();
+
+        if(exceptRoundNum != null){
+            List<WinLotto> winLottos = winLottoRepository.findAllByOrderByRoundDesc();
+            int ern = Integer.parseInt(exceptRoundNum);
+            int size = winLottos.size() < ern ? winLottos.size() : ern;
+            for(int i=0;i<size;i++){
+                exceptNumSet.add(winLottos.get(i).getNum1());
+                exceptNumSet.add(winLottos.get(i).getNum2());
+                exceptNumSet.add(winLottos.get(i).getNum3());
+                exceptNumSet.add(winLottos.get(i).getNum4());
+                exceptNumSet.add(winLottos.get(i).getNum5());
+                exceptNumSet.add(winLottos.get(i).getNum6());
+            }
+        }
+
+        Lotto lotto = Lotto.builder().build().randomize(exceptNumSet);
+        if(lotto == null){
+            throw new RuntimeException();
+        }
+
         responseDto = new RandomLottoResponseDto(lotto);
         responseDto = findPastWinCnt(responseDto);
 

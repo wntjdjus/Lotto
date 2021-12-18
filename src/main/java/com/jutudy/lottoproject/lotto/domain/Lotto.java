@@ -39,16 +39,28 @@ public class Lotto {
         return nums;
     }
 
-    public void randomize() {
+    public Lotto randomize(Set<Long> exceptNumSet) {
         Set<Long> set = new HashSet<>();
         Random random = new Random();
         List<Long> list = new ArrayList<>();
-        while (list.size() < 6) {
+
+        if(exceptNumSet != null){
+            for(long exceptNum : exceptNumSet){
+                set.add(exceptNum);
+            }
+        }
+
+        while (set.size() < 45 && list.size() < 6) {
             long num = random.nextInt(45) + 1;
             if (set.add(num)) {
                 list.add(num);
             }
         }
+
+        if(list.size() != 6){
+            return null;
+        }
+
         Collections.sort(list);
 
         this.num1 = list.get(0);
@@ -57,5 +69,7 @@ public class Lotto {
         this.num4 = list.get(3);
         this.num5 = list.get(4);
         this.num6 = list.get(5);
+
+        return this;
     }
 }

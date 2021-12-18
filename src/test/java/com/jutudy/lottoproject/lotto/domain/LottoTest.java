@@ -2,6 +2,9 @@ package com.jutudy.lottoproject.lotto.domain;
 
 import org.junit.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
@@ -12,7 +15,7 @@ public class LottoTest {
         Lotto lotto = Lotto.builder().build();
 
         //when
-        lotto.randomize();
+        lotto.randomize(null);
 
         //then
         assertThat(lotto.getNum1()).isBetween(1L,45L);
@@ -27,5 +30,19 @@ public class LottoTest {
         assertThat(lotto.getNum3()).isLessThan(lotto.getNum4());
         assertThat(lotto.getNum4()).isLessThan(lotto.getNum5());
         assertThat(lotto.getNum5()).isLessThan(lotto.getNum6());
+    }
+    @Test
+    public void 랜덤실패(){
+        //given
+        Set<Long> set = new HashSet<>();
+        for(long i=1;i<=45;i++){
+            set.add(i);
+        }
+
+        //when
+        Lotto lotto = Lotto.builder().build().randomize(set);
+
+        //then
+        assertThat(lotto).isNull();
     }
 }

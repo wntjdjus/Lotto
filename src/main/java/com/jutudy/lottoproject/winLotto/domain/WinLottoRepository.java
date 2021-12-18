@@ -14,4 +14,6 @@ public interface WinLottoRepository extends JpaRepository<WinLotto, Long> {
 
     WinLotto findTopByOrderByDateDesc();
 
+    List<WinLotto> findAllByOrderByRoundDesc();
+
 }

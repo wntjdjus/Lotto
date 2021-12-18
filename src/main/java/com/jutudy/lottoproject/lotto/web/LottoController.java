@@ -18,7 +18,7 @@ public class LottoController {
 
     @GetMapping("/random-lotto")
     public RandomLottoResponseDto getRandomLotto(@RequestParam(value = "except-round-num", required = false) String exceptRoundNum) {
-        RandomLottoResponseDto responseDto = lottoService.getRandomLotto();
+        RandomLottoResponseDto responseDto = lottoService.getRandomLotto(exceptRoundNum);
         logger.debug(responseDto.toString());
         return responseDto;
     }
