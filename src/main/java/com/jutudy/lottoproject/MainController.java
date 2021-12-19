@@ -22,20 +22,20 @@ public class MainController {
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-        WinLottoResponseDto responseDto = winLottoService.selectRecentWinLotto();
-
-        model.addAttribute("nextRound", responseDto.getRound() + 1);
-
-        try {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(dateFormat.parse(responseDto.getDate()));
-            calendar.add(Calendar.DATE, 7);
-            model.addAttribute("nextDay", dateFormat.format(calendar.getTime()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+//        WinLottoResponseDto responseDto = winLottoService.selectRecentWinLotto();
+//
+//        model.addAttribute("nextRound", responseDto.getRound() + 1);
+//
+//        try {
+//            Calendar calendar = Calendar.getInstance();
+//            calendar.setTime(dateFormat.parse(responseDto.getDate()));
+//            calendar.add(Calendar.DATE, 7);
+//            model.addAttribute("nextDay", dateFormat.format(calendar.getTime()));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//            throw new RuntimeException();
+//        }
 
         if (user != null) {
             model.addAttribute("userName", user.getName());

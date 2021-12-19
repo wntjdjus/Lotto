@@ -4,6 +4,22 @@ var main = {
     init: function () {
         var _this = this;
 
+        for (var i = 1; i <= 45; i++) {
+
+            var checkbox = `
+                        <label><input class="form-check-input" type="checkbox" value="`
+                + i +
+                `">`
+                + i +
+                `</label>`;
+            var num = document.createElement("div");
+            num.setAttribute("class", "form-check form-check-inline");
+            num.innerHTML = checkbox;
+            const modalBody = document.getElementById("modal-body");
+
+            modalBody.appendChild(num);
+        }
+
         $('#btn-select').on('click', function () {
             _this.select();
         });
@@ -29,13 +45,13 @@ var main = {
         var query = "?";
         var isQuery = false;
         const exceptRoundCheck = document.getElementById("exceptRoundCheck");
-        if(exceptRoundCheck.value == "Y"){
+        if (exceptRoundCheck.value == "Y") {
             const exceptRoundNum = document.getElementById("exceptRoundNum");
-            query += "except-round-num="+exceptRoundNum.options[exceptRoundNum.selectedIndex].value;
+            query += "except-round-num=" + exceptRoundNum.options[exceptRoundNum.selectedIndex].value;
             isQuery = true;
         }
 
-        if(isQuery){
+        if (isQuery) {
             uri += query;
         }
 
@@ -64,21 +80,21 @@ var main = {
             node.innerHTML += (button);
 
             var colapse = `
-                <a class="" data-bs-toggle="collapse" href="#lottoCol`+idx+`" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                <a class="" data-bs-toggle="collapse" href="#lottoCol` + idx + `" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
                 </svg>
                 </a>
                 <div class="row">
                     <div class="col">
-                        <div class="collapse multi-collapse" id="lottoCol`+idx+`">
+                        <div class="collapse multi-collapse" id="lottoCol` + idx + `">
                             <div class="card card-body">
                                 <div class="fs-6">해당 번호 과거 당첨 횟수</div>
-                                <div class="fs-6">1등 : `+lotto.pastWin1Cnt+`번</div>
-                                <div class="fs-6">2등 : `+lotto.pastWin2Cnt+`번</div>
-                                <div class="fs-6">3등 : `+lotto.pastWin3Cnt+`번</div>
-                                <div class="fs-6">4등 : `+lotto.pastWin4Cnt+`번</div>
-                                <div class="fs-6">5등 : `+lotto.pastWin5Cnt+`번</div>
+                                <div class="fs-6">1등 : ` + lotto.pastWin1Cnt + `번</div>
+                                <div class="fs-6">2등 : ` + lotto.pastWin2Cnt + `번</div>
+                                <div class="fs-6">3등 : ` + lotto.pastWin3Cnt + `번</div>
+                                <div class="fs-6">4등 : ` + lotto.pastWin4Cnt + `번</div>
+                                <div class="fs-6">5등 : ` + lotto.pastWin5Cnt + `번</div>
                             </div>
                         </div>
                     </div>
@@ -95,7 +111,7 @@ var main = {
 
     },
     save: function (parent) {
-        if(!this.loginCheck()){
+        if (!this.loginCheck()) {
             return false;
         }
         var child = parent.childNodes;
@@ -128,11 +144,11 @@ var main = {
         element.innerHTML = '';
         idx = 1;
     },
-    loginCheck: function (){
-        if(userId == null){
+    loginCheck: function () {
+        if (userId == null) {
             alert("로그인 후 가능합니다.");
             return false;
-        }else{
+        } else {
             return true;
         }
     }
@@ -140,21 +156,43 @@ var main = {
 
 main.init();
 
-$(document).ready(function (){
-    $("input:checkbox").on('click', function (){
+$(document).ready(function () {
+    $("input:checkbox").on('click', function () {
         var isChecked = false;
-        if($(this).prop('checked')){
+        if ($(this).prop('checked')) {
             isChecked = true;
         }
-        if(this.id == 'exceptRoundCheck'){
+        if (this.id == 'exceptRoundCheck') {
             const roundList = document.getElementById("exceptRoundNum");
-            if(isChecked){
+            if (isChecked) {
                 roundList.style.display = "block";
                 this.value = "Y";
-            }else{
+            } else {
                 roundList.style.display = "none";
                 this.value = "N";
             }
+        } else if (this.id == 'exceptNumsCheck') {
+            if (isChecked) {
+                var modal = $('#exceptNumsModal');
+
+                modal.modal('show');
+            }
+        }
+    });
+    $('#modal-cancel').on('click', function () {
+        const exceptNumsCheck = document.getElementById('exceptNumsCheck');
+        exceptNumsCheck.checked = false;
+    });
+    $('#modal-close').on('click', function () {
+        const exceptNumsCheck = document.getElementById('exceptNumsCheck');
+        exceptNumsCheck.checked = false;
+    });
+    $('#modal-confirm').on('click', function () {
+        var exceptNums = '';
+        const modalBody = document.getElementById('modal-body');
+        const childs = modalBody.childNodes;
+        var length = childs.length;
+        for (var i = 0; i < length; i++) {
         }
     });
 });

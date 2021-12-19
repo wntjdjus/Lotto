@@ -63,6 +63,30 @@
             <option value="5">5회</option>
         </select>
     </div>
+    <div class="form-check">
+        <label>
+            <input class="form-check-input" type="checkbox" id="exceptNumsCheck" value="">
+            선택한 번호 제외
+        </label>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exceptNumsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">선택한 번호 제외</h5>
+                    <button type="button" class="btn-close" id="modal-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="modal-cancel" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary" id="modal-confirm">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="lotto">
     </div>
 </div>

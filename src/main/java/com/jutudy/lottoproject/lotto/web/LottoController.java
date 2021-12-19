@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
 @RequiredArgsConstructor
 @RestController
 public class LottoController {
@@ -17,8 +21,22 @@ public class LottoController {
     private final LottoService lottoService;
 
     @GetMapping("/random-lotto")
-    public RandomLottoResponseDto getRandomLotto(@RequestParam(value = "except-round-num", required = false) String exceptRoundNum) {
-        RandomLottoResponseDto responseDto = lottoService.getRandomLotto(exceptRoundNum);
+    public RandomLottoResponseDto getRandomLotto(
+            @RequestParam(value = "except-recent-round-cnt", required = false) String exceptRecentRoundCnt,
+            @RequestParam(value = "except-nums", required = false) String exceptNums) {
+        List<Long> exceptNumList = null;
+        if (exceptNums != null) {
+            exceptNumList = new ArrayList<>();
+            StringTokenizer st = new StringTokenizer(exceptNums, "+");
+            while (st.hasMoreTokens()) {
+                try {
+                    exceptNumList.add(Long.parseLong(st.nextToken()));
+                } catch (Exception e) {
+                    throw new RuntimeException();
+                }
+            }
+        }
+        RandomLottoResponseDto responseDto = lottoService.getRandomLotto(exceptRecentRoundCnt, exceptNumList);
         logger.debug(responseDto.toString());
         return responseDto;
     }

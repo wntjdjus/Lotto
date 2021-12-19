@@ -17,16 +17,16 @@ public class LottoService {
 
     private final WinLottoRepository winLottoRepository;
 
-    public RandomLottoResponseDto getRandomLotto(String exceptRoundNum){
+    public RandomLottoResponseDto getRandomLotto(String exceptRecentRoundCnt, List<Long> exceptNumList) {
         RandomLottoResponseDto responseDto = null;
 
         Set<Long> exceptNumSet = new HashSet<>();
 
-        if(exceptRoundNum != null){
+        if (exceptRecentRoundCnt != null) {
             List<WinLotto> winLottos = winLottoRepository.findAllByOrderByRoundDesc();
-            int ern = Integer.parseInt(exceptRoundNum);
+            int ern = Integer.parseInt(exceptRecentRoundCnt);
             int size = winLottos.size() < ern ? winLottos.size() : ern;
-            for(int i=0;i<size;i++){
+            for (int i = 0; i < size; i++) {
                 exceptNumSet.add(winLottos.get(i).getNum1());
                 exceptNumSet.add(winLottos.get(i).getNum2());
                 exceptNumSet.add(winLottos.get(i).getNum3());
@@ -36,8 +36,15 @@ public class LottoService {
             }
         }
 
+        if (exceptNumList != null) {
+            int size = exceptNumList.size();
+            for (int i = 0; i < size; i++) {
+                exceptNumSet.add(exceptNumList.get(i));
+            }
+        }
+
         Lotto lotto = Lotto.builder().build().randomize(exceptNumSet);
-        if(lotto == null){
+        if (lotto == null) {
             throw new RuntimeException();
         }
 
