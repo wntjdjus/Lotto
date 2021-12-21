@@ -27,7 +27,7 @@ public class LottoController {
         List<Long> exceptNumList = null;
         if (exceptNums != null) {
             exceptNumList = new ArrayList<>();
-            StringTokenizer st = new StringTokenizer(exceptNums, "+");
+            StringTokenizer st = new StringTokenizer(exceptNums);
             while (st.hasMoreTokens()) {
                 try {
                     exceptNumList.add(Long.parseLong(st.nextToken()));

@@ -51,7 +51,16 @@ var main = {
             isQuery = true;
         }
 
-        if (isQuery) {
+        const exceptNumsCheck = document.getElementById('exceptNumsCheck');
+        if(exceptNumsCheck.checked == true){
+            if(isQuery){
+                query += '&';
+            }
+            query += 'except-nums=' + exceptNumsCheck.value;
+            isQuery = true;
+        }
+
+        if(isQuery){
             uri += query;
         }
 
@@ -143,6 +152,9 @@ var main = {
         const element = document.getElementById("lotto");
         element.innerHTML = '';
         idx = 1;
+        this.modalReset();
+        document.getElementById('exceptRoundCheck').checked = false;
+        this.exceptRoundCheckClick();
     },
     loginCheck: function () {
         if (userId == null) {
@@ -150,6 +162,64 @@ var main = {
             return false;
         } else {
             return true;
+        }
+    },
+    modalReset: function () {
+        const modalBody = document.getElementById('modal-body');
+        const childs = modalBody.children;
+        var length = childs.length;
+        for (var i = 0; i < length; i++) {
+            var checkBox = childs[i].children[0].children[0];
+            if (checkBox.checked == true) {
+                checkBox.checked = false;
+            }
+        }
+
+        const exceptNumsCheck = document.getElementById('exceptNumsCheck');
+        exceptNumsCheck.checked = false;
+    },
+    modalConfirm: function () {
+        var exceptNums = '';
+        const modalBody = document.getElementById('modal-body');
+        const exceptNumsCheck = document.getElementById('exceptNumsCheck');
+        const childs = modalBody.children;
+        var length = childs.length;
+        var isChecked = false;
+        for (var i = 0; i < length; i++) {
+            var checkBox = childs[i].children[0].children[0];
+            if (checkBox.checked == true) {
+                if(exceptNums != ''){
+                    exceptNums += '%20';
+                }
+                exceptNums += checkBox.value;
+                isChecked = true;
+            }
+        }
+        if(isChecked){
+            exceptNumsCheck.value = exceptNums;
+        }else{
+            exceptNumsCheck.checked = false;
+        }
+    },
+    exceptRoundCheckClick: function (){
+        const exceptRoundCheck = document.getElementById('exceptRoundCheck');
+        const roundList = document.getElementById("exceptRoundNum");
+        if (exceptRoundCheck.checked == true) {
+            roundList.style.display = "block";
+            this.value = "Y";
+        } else {
+            roundList.style.display = "none";
+            this.value = "N";
+        }
+    },
+    exceptNumsCheckClick: function (){
+        const exceptNumsCheck = document.getElementById("exceptNumsCheck");
+        if (exceptNumsCheck.checked == true) {
+            var modal = $('#exceptNumsModal');
+
+            modal.modal('show');
+        }else{
+            main.modalReset();
         }
     }
 };
@@ -163,36 +233,18 @@ $(document).ready(function () {
             isChecked = true;
         }
         if (this.id == 'exceptRoundCheck') {
-            const roundList = document.getElementById("exceptRoundNum");
-            if (isChecked) {
-                roundList.style.display = "block";
-                this.value = "Y";
-            } else {
-                roundList.style.display = "none";
-                this.value = "N";
-            }
+            main.exceptRoundCheckClick();
         } else if (this.id == 'exceptNumsCheck') {
-            if (isChecked) {
-                var modal = $('#exceptNumsModal');
-
-                modal.modal('show');
-            }
+            main.exceptNumsCheckClick();
         }
     });
     $('#modal-cancel').on('click', function () {
-        const exceptNumsCheck = document.getElementById('exceptNumsCheck');
-        exceptNumsCheck.checked = false;
+        main.modalReset();
     });
     $('#modal-close').on('click', function () {
-        const exceptNumsCheck = document.getElementById('exceptNumsCheck');
-        exceptNumsCheck.checked = false;
+        main.modalReset();
     });
     $('#modal-confirm').on('click', function () {
-        var exceptNums = '';
-        const modalBody = document.getElementById('modal-body');
-        const childs = modalBody.childNodes;
-        var length = childs.length;
-        for (var i = 0; i < length; i++) {
-        }
+        main.modalConfirm();
     });
 });
